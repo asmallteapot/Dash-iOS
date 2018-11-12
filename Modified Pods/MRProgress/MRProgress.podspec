@@ -6,22 +6,22 @@ Pod::Spec.new do |s|
   s.social_media_url      = 'https://twitter.com/mrackwitz'
   s.author                = { 'Marius Rackwitz' => 'git@mariusrackwitz.de' }
   s.license               = 'MIT License'
-  s.source                = { :git => 'https://github.com/mrackwitz/MRProgress.git', :tag => s.version.to_s }
+  s.source                = { git: 'https://github.com/mrackwitz/MRProgress.git', tag: s.version.to_s }
   s.source_files          = 'src/MRProgress.h'
   s.platform              = :ios, '7.0'
   s.requires_arc          = true
-  s.default_subspecs      = %w{Blur ActivityIndicator Circular Icons NavigationBarProgress Overlay}
-  
+  s.default_subspecs      = %w[Blur ActivityIndicator Circular Icons NavigationBarProgress Overlay]
+
   s.subspec 'Blur' do |subs|
     subs.source_files = 'src/Blur/*.{h,m}'
     subs.dependency 'MRProgress/Helper'
-    subs.ios.frameworks = %w{UIKit QuartzCore CoreGraphics Accelerate}
+    subs.ios.frameworks = %w[UIKit QuartzCore CoreGraphics Accelerate]
   end
 
   s.subspec 'ActivityIndicator' do |subs|
     subs.source_files = 'src/Components/MRActivityIndicatorView.{h,m}'
     subs.dependency 'MRProgress/Stopable'
-    subs.ios.frameworks = %w{UIKit QuartzCore CoreGraphics}
+    subs.ios.frameworks = %w[UIKit QuartzCore CoreGraphics]
   end
 
   s.subspec 'Circular' do |subs|
@@ -29,20 +29,20 @@ Pod::Spec.new do |s|
     subs.dependency 'MRProgress/Stopable'
     subs.dependency 'MRProgress/Helper'
     subs.dependency 'MRProgress/ProgressBaseClass'
-    subs.ios.frameworks = %w{UIKit QuartzCore}
+    subs.ios.frameworks = %w[UIKit QuartzCore]
   end
 
   s.subspec 'Icons' do |subs|
     subs.source_files = 'src/Components/MRIconView.{h,m}'
-    subs.ios.frameworks = %w{UIKit QuartzCore}
+    subs.ios.frameworks = %w[UIKit QuartzCore]
   end
-  
+
   s.subspec 'NavigationBarProgress' do |subs|
     subs.source_files = 'src/Components/MRNavigationBarProgressView.{h,m}'
     subs.dependency 'MRProgress/ProgressBaseClass'
-    subs.ios.frameworks = %w{UIKit}
+    subs.ios.frameworks = %w[UIKit]
   end
-  
+
   s.subspec 'Overlay' do |subs|
     subs.source_files = 'src/Components/MRProgressOverlayView.{h,m}'
     subs.dependency 'MRProgress/ActivityIndicator'
@@ -50,9 +50,9 @@ Pod::Spec.new do |s|
     subs.dependency 'MRProgress/Icons'
     subs.dependency 'MRProgress/Blur'
     subs.dependency 'MRProgress/Helper'
-    subs.ios.frameworks = %w{UIKit QuartzCore CoreGraphics}
+    subs.ios.frameworks = %w[UIKit QuartzCore CoreGraphics]
   end
-  
+
   # Optional support subspecs - you can use them if they make sense for you
   s.subspec 'AFNetworking' do |subs|
     subs.subspec 'Base' do |subs|
@@ -86,12 +86,12 @@ Pod::Spec.new do |s|
     subs.alias_subspecs 'Circular'              => 'ProgressBaseClass'
     subs.alias_subspecs 'NavigationBarProgress' => 'ProgressBaseClass'
   end
-  
+
   # "Public" helper subspecs - you can rely on these
   s.subspec 'MessageInterceptor' do |subs|
     subs.source_files = 'src/Utils/MRMessageInterceptor.{h,m}'
   end
-  
+
   s.subspec 'MethodCopier' do |subs|
     subs.source_files = 'src/Utils/MRMethodCopier.{h,m}'
   end
@@ -103,17 +103,17 @@ Pod::Spec.new do |s|
   # "Private" helper subspecs - do not depend on these
   s.subspec 'ProgressBaseClass' do |subs|
     subs.source_files = 'src/Components/MRProgressView.{h,m}'
-    subs.ios.frameworks = %w{UIKit}
+    subs.ios.frameworks = %w[UIKit]
   end
 
   s.subspec 'Stopable' do |subs|
     subs.source_files = 'src/Components/{MRStopableView,MRStopButton}.{h,m}'
-    subs.ios.frameworks = %w{UIKit QuartzCore}
+    subs.ios.frameworks = %w[UIKit QuartzCore]
     subs.dependency 'MRProgress/Helper'
   end
-  
+
   s.subspec 'Helper' do |subs|
     subs.source_files = 'src/Utils/MRProgressHelper.h'
-    subs.ios.frameworks = %w{UIKit QuartzCore}
+    subs.ios.frameworks = %w[UIKit QuartzCore]
   end
 end
