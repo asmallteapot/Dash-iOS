@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "sqlite3.h"
 #import "FMResultSet.h"
 #import "FMDatabasePool.h"

@@ -6,7 +6,7 @@
 //  Copyright 2011 Flying Meat Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "sqlite3.h"
 
 /*

@@ -16,7 +16,7 @@
 //
 
 #import "DHAppleAPIProtocol.h"
-#import <Apple_Docs_Framework/Apple_Docs_Framework.h>
+@import Apple_Docs_Framework;
 #import "DHDocsetManager.h"
 #import "DHLatencyTester.h"
 #import "DHWebViewController.h"

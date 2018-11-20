@@ -16,7 +16,7 @@
 //
 
 #import "NSString+DHUtils.h"
-#import <MobileCoreServices/MobileCoreServices.h>
+@import MobileCoreServices;
 
 NSString *const DHPBoardType = @"DashPBoard";
 

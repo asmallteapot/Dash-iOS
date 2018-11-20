@@ -15,8 +15,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Foundation/Foundation.h>
-#import <JavaScriptCore/JavaScriptCore.h>
+@import Foundation;
+@import JavaScriptCore;
 
 @protocol DHJavaScriptBridgeExport <JSExport>
 

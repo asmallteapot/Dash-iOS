@@ -16,7 +16,7 @@
 //
 
 #import "NSData+DHUtils.h"
-#import <CommonCrypto/CommonCryptor.h>
+@import CommonCrypto;
 
 @implementation NSData (DHUtils)
 

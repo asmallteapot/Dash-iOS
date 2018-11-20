@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "sqlite3.h"
 
 #ifndef __has_feature      // Optional.

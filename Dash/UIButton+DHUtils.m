@@ -2,7 +2,7 @@
 
 #import "UIButton+DHUtils.h"
 
-#import <objc/runtime.h>
+@import ObjectiveC.runtime;
 
 @implementation UIButton (DHUtils)
 

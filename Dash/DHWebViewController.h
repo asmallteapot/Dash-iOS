@@ -15,10 +15,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
+@import UIKit;
+@import WebKit;
 #import "DHDBResult.h"
-#import <JavaScriptCore/JavaScriptCore.h>
+@import JavaScriptCore;
 #import "DHWebProgressView.h"
 
 @class DHTocBrowser;

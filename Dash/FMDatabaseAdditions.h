@@ -6,7 +6,7 @@
 //  Copyright 2005 Flying Meat Inc.. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface FMDatabase (FMDatabaseAdditions)
 
