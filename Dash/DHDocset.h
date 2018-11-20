@@ -16,8 +16,10 @@
 //
 
 @import Foundation;
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
+
+#import <FMDB/FMDatabase.h>
+#import <FMDB/FMDatabaseAdditions.h>
+
 
 @interface DHDocset : NSObject
 

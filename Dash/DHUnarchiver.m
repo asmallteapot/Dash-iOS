@@ -16,6 +16,9 @@
 //
 
 #import "DHUnarchiver.h"
+
+@import SQLite3;
+
 #import "archive.h"
 #import "archive_entry.h"
 #import "zlib.h"

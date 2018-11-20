@@ -5,6 +5,7 @@ inhibit_all_warnings!
 target 'Dash' do
   pod 'AutoCoding'
   pod 'DZNEmptyDataSet', git: 'https://github.com/benrudhart/DZNEmptyDataSet.git'
+  pod 'FMDB/standalone-fts'
   pod 'GZIP'
   pod 'JGMethodSwizzler'
   pod 'NSTimer-Blocks'

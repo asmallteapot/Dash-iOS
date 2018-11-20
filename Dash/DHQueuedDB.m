@@ -15,8 +15,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHQueuedDB.h"
+@import SQLite3;
+
+#import <FMDB/FMDatabase.h>
+#import <FMDB/FMDatabaseAdditions.h>
+#import <FMDB/FMResultSet.h>
+
+#import "DHDBResult.h"
 #import "DHDBSearcher.h"
+#import "FMDatabase+DHDBAdditions.h"
+
+#import "DHQueuedDB.h"
 
 @implementation DHQueuedDB
 

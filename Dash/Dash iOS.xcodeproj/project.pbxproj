@@ -9,12 +9,6 @@
 /* Begin PBXBuildFile section */
 		26480C2B1E2E9ABB00E3145E /* docset_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 26480C2A1E2E9ABB00E3145E /* docset_icon.png */; };
 		3A2F71C185D6471649E8F3A7 /* libPods-Dash-Dash App Store.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB91D369AD27465BED375AD /* libPods-Dash-Dash App Store.a */; };
-		4303A3BC19C6584F00A7CD85 /* whitespace_tokenizer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B119C6584F00A7CD85 /* whitespace_tokenizer.c */; };
-		4303A3BD19C6584F00A7CD85 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B319C6584F00A7CD85 /* FMDatabase.m */; };
-		4303A3BE19C6584F00A7CD85 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B519C6584F00A7CD85 /* FMDatabaseAdditions.m */; };
-		4303A3BF19C6584F00A7CD85 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B719C6584F00A7CD85 /* FMResultSet.m */; };
-		4303A3C019C6584F00A7CD85 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B919C6584F00A7CD85 /* FMDatabasePool.m */; };
-		4303A3C119C6584F00A7CD85 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3BB19C6584F00A7CD85 /* FMDatabaseQueue.m */; };
 		4303A3C419C658B000A7CD85 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4303A3C319C658B000A7CD85 /* libsqlite3.dylib */; };
 		4303A3C719C6590000A7CD85 /* DHDocset.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3C619C6590000A7CD85 /* DHDocset.m */; };
 		4303A3CD19C65E6A00A7CD85 /* DHDocsetIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3CC19C65E6A00A7CD85 /* DHDocsetIndexer.m */; };
@@ -85,7 +79,6 @@
 		43AB65371ED19D2F00A6EC18 /* NSObject+DHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BB044519ED1BB8000FBC0D /* NSObject+DHUtils.m */; };
 		43AB65381ED19D2F00A6EC18 /* UIView+DHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 43915EE819C5D2FD002806FF /* UIView+DHUtils.m */; };
 		43AB65391ED19D2F00A6EC18 /* NSString+DHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 438525E719C13ECE002BAFD1 /* NSString+DHUtils.m */; };
-		43AB653A1ED19D2F00A6EC18 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B319C6584F00A7CD85 /* FMDatabase.m */; };
 		43AB653B1ED19D2F00A6EC18 /* DHPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4398D34519BF55B500457CAF /* DHPreferences.m */; };
 		43AB653C1ED19D2F00A6EC18 /* DHTypeBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 437FE06519E2AC0D0022ADF4 /* DHTypeBrowser.m */; };
 		43AB653D1ED19D2F00A6EC18 /* DHCheatRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 435145961DEB7035000874A8 /* DHCheatRepo.m */; };
@@ -93,7 +86,6 @@
 		43AB653F1ED19D2F00A6EC18 /* DHFeedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EDD19E19C52E3400A0EBEC /* DHFeedResult.m */; };
 		43AB65401ED19D2F00A6EC18 /* DHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD2F0119BB8D87007E594D /* DHWebViewController.m */; };
 		43AB65411ED19D2F00A6EC18 /* NSData+DHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DCAEB71A9C3C8500A28A95 /* NSData+DHUtils.m */; };
-		43AB65421ED19D2F00A6EC18 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B519C6584F00A7CD85 /* FMDatabaseAdditions.m */; };
 		43AB65431ED19D2F00A6EC18 /* DHRepoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 436DF77F19FFA926008814F8 /* DHRepoTableView.m */; };
 		43AB65441ED19D2F00A6EC18 /* DHBlockProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F25F9B19EBDEF30025CDC4 /* DHBlockProtocol.m */; };
 		43AB65451ED19D2F00A6EC18 /* DHRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0956B19BFD57500F8611B /* DHRepo.m */; };
@@ -113,7 +105,6 @@
 		43AB65531ED19D2F00A6EC18 /* DHCSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B6F8619EBC98A003023E8 /* DHCSS.m */; };
 		43AB65541ED19D2F00A6EC18 /* DHDBResultSorter.m in Sources */ = {isa = PBXBuildFile; fileRef = 439051FF19E692D90083A55E /* DHDBResultSorter.m */; };
 		43AB65551ED19D2F00A6EC18 /* DHRemoteBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 432321E11AA1BBF70045BA77 /* DHRemoteBrowser.m */; };
-		43AB65561ED19D2F00A6EC18 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3BB19C6584F00A7CD85 /* FMDatabaseQueue.m */; };
 		43AB65571ED19D2F00A6EC18 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD2EF119BB8D87007E594D /* main.m */; };
 		43AB65581ED19D2F00A6EC18 /* DHTocBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D28EBA19F97D5500FDC5EE /* DHTocBrowser.m */; };
 		43AB65591ED19D2F00A6EC18 /* DHDocsetDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0956E19BFDBDC00F8611B /* DHDocsetDownloader.m */; };
@@ -124,12 +115,10 @@
 		43AB655E1ED19D2F00A6EC18 /* DHDocsetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A6D9C819E0D69700780BC8 /* DHDocsetManager.m */; };
 		43AB655F1ED19D2F00A6EC18 /* DHTransferFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 437699A619D8FD3D008B37F4 /* DHTransferFeed.m */; };
 		43AB65601ED19D2F00A6EC18 /* NSFileManager+DHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 438F622319D5E81A00AF71BC /* NSFileManager+DHUtils.m */; };
-		43AB65611ED19D2F00A6EC18 /* whitespace_tokenizer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B119C6584F00A7CD85 /* whitespace_tokenizer.c */; };
 		43AB65621ED19D2F00A6EC18 /* DHJavaScriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 438B45B81A10BB6F0047A156 /* DHJavaScriptBridge.m */; };
 		43AB65631ED19D2F00A6EC18 /* NSTimer+DHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4361651C19CCF8500026F08E /* NSTimer+DHUtils.m */; };
 		43AB65641ED19D2F00A6EC18 /* DHTarixProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 430C768A19E52B7F006F0DE0 /* DHTarixProtocol.m */; };
 		43AB65651ED19D2F00A6EC18 /* DHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3D319C668C200A7CD85 /* DHTypes.m */; };
-		43AB65661ED19D2F00A6EC18 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B919C6584F00A7CD85 /* FMDatabasePool.m */; };
 		43AB65671ED19D2F00A6EC18 /* DHDocsetTransferrer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4341A1F519BFE89A00AD164A /* DHDocsetTransferrer.m */; };
 		43AB65681ED19D2F00A6EC18 /* DHSearchDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F760B119EA61B5002BD8A6 /* DHSearchDisplayController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		43AB65691ED19D2F00A6EC18 /* DHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF51931A07B4C0006AB295 /* DHNavigationController.m */; };
@@ -140,7 +129,6 @@
 		43AB656E1ED19D2F00A6EC18 /* DHDBSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4F06C19E7E88400C22AF5 /* DHDBSearchController.m */; };
 		43AB656F1ED19D2F00A6EC18 /* DHCheatRepoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 435145991DEB7099000874A8 /* DHCheatRepoList.m */; };
 		43AB65701ED19D2F00A6EC18 /* DHQueuedDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4F06319E7CEC500C22AF5 /* DHQueuedDB.m */; };
-		43AB65711ED19D2F00A6EC18 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4303A3B719C6584F00A7CD85 /* FMResultSet.m */; };
 		43AB65721ED19D2F00A6EC18 /* DHUserRepoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FC34011DE784C40089F134 /* DHUserRepoList.m */; };
 		43AB65731ED19D2F00A6EC18 /* DHUserRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43280F531DDE4A7B001C2062 /* DHUserRepo.m */; };
 		43AB65741ED19D2F00A6EC18 /* DHNavigationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0956819BFD19900F8611B /* DHNavigationAnimator.m */; };
@@ -250,6 +238,8 @@
 		43FD2F0219BB8D87007E594D /* DHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD2F0119BB8D87007E594D /* DHWebViewController.m */; };
 		43FD2F0419BB8D87007E594D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43FD2F0319BB8D87007E594D /* Images.xcassets */; };
 		45D28F8ABD1FC392B1930467 /* libPods-Dash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2364AD2032B0714BCD2265 /* libPods-Dash.a */; };
+		9B14768821A5E84C008C4475 /* FMDatabase+DHDBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */; };
+		9B14768921A5E855008C4475 /* FMDatabase+DHDBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */; };
 		F5C39C00200A836D00734571 /* DHDocsetBrowserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C39BFF200A836D00734571 /* DHDocsetBrowserViewModel.m */; };
 /* End PBXBuildFile section */
 
@@ -280,18 +270,6 @@
 
 /* Begin PBXFileReference section */
 		26480C2A1E2E9ABB00E3145E /* docset_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = docset_icon.png; sourceTree = "<group>"; };
-		4303A3B019C6584F00A7CD85 /* whitespace_tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = whitespace_tokenizer.h; sourceTree = "<group>"; };
-		4303A3B119C6584F00A7CD85 /* whitespace_tokenizer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = whitespace_tokenizer.c; sourceTree = "<group>"; };
-		4303A3B219C6584F00A7CD85 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		4303A3B319C6584F00A7CD85 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		4303A3B419C6584F00A7CD85 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		4303A3B519C6584F00A7CD85 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		4303A3B619C6584F00A7CD85 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		4303A3B719C6584F00A7CD85 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		4303A3B819C6584F00A7CD85 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		4303A3B919C6584F00A7CD85 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		4303A3BA19C6584F00A7CD85 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		4303A3BB19C6584F00A7CD85 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
 		4303A3C319C658B000A7CD85 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		4303A3C519C6590000A7CD85 /* DHDocset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHDocset.h; sourceTree = "<group>"; };
 		4303A3C619C6590000A7CD85 /* DHDocset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHDocset.m; sourceTree = "<group>"; };
@@ -486,6 +464,8 @@
 		6BB3997912C96D08897BF444 /* Pods-Dash-Dash App Store.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash-Dash App Store.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Dash-Dash App Store/Pods-Dash-Dash App Store.release.xcconfig"; sourceTree = "<group>"; };
 		7E45E2662CBB7671D0D844A3 /* Pods-Dash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Dash/Pods-Dash.release.xcconfig"; sourceTree = "<group>"; };
 		9A2364AD2032B0714BCD2265 /* libPods-Dash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dash.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B14768621A5E84B008C4475 /* FMDatabase+DHDBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+DHDBAdditions.h"; sourceTree = "<group>"; };
+		9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+DHDBAdditions.m"; sourceTree = "<group>"; };
 		9FB91D369AD27465BED375AD /* libPods-Dash-Dash App Store.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dash-Dash App Store.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAE47FF5DEE33300EBFF9AEA /* Pods-Dash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Dash/Pods-Dash.debug.xcconfig"; sourceTree = "<group>"; };
 		F5C39BFE200A836D00734571 /* DHDocsetBrowserViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHDocsetBrowserViewModel.h; sourceTree = "<group>"; };
@@ -535,37 +515,19 @@
 		4303A3AF19C657FE00A7CD85 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				4303A3C219C6585500A7CD85 /* FMDB */,
 				43A6D9C719E0D69700780BC8 /* DHDocsetManager.h */,
 				43A6D9C819E0D69700780BC8 /* DHDocsetManager.m */,
 				4303A3C519C6590000A7CD85 /* DHDocset.h */,
 				4303A3C619C6590000A7CD85 /* DHDocset.m */,
 				4303A3CB19C65E6A00A7CD85 /* DHDocsetIndexer.h */,
 				4303A3CC19C65E6A00A7CD85 /* DHDocsetIndexer.m */,
+				9B14768621A5E84B008C4475 /* FMDatabase+DHDBAdditions.h */,
+				9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */,
 				43A1C2662001757700512DB3 /* Apple API Docs */,
 				4303A3CE19C668B500A7CD85 /* Types */,
 				431173D919DA3503007E238E /* Others */,
 			);
 			name = Database;
-			sourceTree = "<group>";
-		};
-		4303A3C219C6585500A7CD85 /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				4303A3B019C6584F00A7CD85 /* whitespace_tokenizer.h */,
-				4303A3B119C6584F00A7CD85 /* whitespace_tokenizer.c */,
-				4303A3B219C6584F00A7CD85 /* FMDatabase.h */,
-				4303A3B319C6584F00A7CD85 /* FMDatabase.m */,
-				4303A3B419C6584F00A7CD85 /* FMDatabaseAdditions.h */,
-				4303A3B519C6584F00A7CD85 /* FMDatabaseAdditions.m */,
-				4303A3B619C6584F00A7CD85 /* FMResultSet.h */,
-				4303A3B719C6584F00A7CD85 /* FMResultSet.m */,
-				4303A3B819C6584F00A7CD85 /* FMDatabasePool.h */,
-				4303A3B919C6584F00A7CD85 /* FMDatabasePool.m */,
-				4303A3BA19C6584F00A7CD85 /* FMDatabaseQueue.h */,
-				4303A3BB19C6584F00A7CD85 /* FMDatabaseQueue.m */,
-			);
-			name = FMDB;
 			sourceTree = "<group>";
 		};
 		4303A3CE19C668B500A7CD85 /* Types */ = {
@@ -1350,7 +1312,6 @@
 				43AB65371ED19D2F00A6EC18 /* NSObject+DHUtils.m in Sources */,
 				43AB65381ED19D2F00A6EC18 /* UIView+DHUtils.m in Sources */,
 				43AB65391ED19D2F00A6EC18 /* NSString+DHUtils.m in Sources */,
-				43AB653A1ED19D2F00A6EC18 /* FMDatabase.m in Sources */,
 				43AB653B1ED19D2F00A6EC18 /* DHPreferences.m in Sources */,
 				43AB653C1ED19D2F00A6EC18 /* DHTypeBrowser.m in Sources */,
 				43AB653D1ED19D2F00A6EC18 /* DHCheatRepo.m in Sources */,
@@ -1358,7 +1319,6 @@
 				43AB653F1ED19D2F00A6EC18 /* DHFeedResult.m in Sources */,
 				43AB65401ED19D2F00A6EC18 /* DHWebViewController.m in Sources */,
 				43AB65411ED19D2F00A6EC18 /* NSData+DHUtils.m in Sources */,
-				43AB65421ED19D2F00A6EC18 /* FMDatabaseAdditions.m in Sources */,
 				43AB65431ED19D2F00A6EC18 /* DHRepoTableView.m in Sources */,
 				43AB65441ED19D2F00A6EC18 /* DHBlockProtocol.m in Sources */,
 				43AB65451ED19D2F00A6EC18 /* DHRepo.m in Sources */,
@@ -1378,7 +1338,6 @@
 				43AB65531ED19D2F00A6EC18 /* DHCSS.m in Sources */,
 				43AB65541ED19D2F00A6EC18 /* DHDBResultSorter.m in Sources */,
 				43AB65551ED19D2F00A6EC18 /* DHRemoteBrowser.m in Sources */,
-				43AB65561ED19D2F00A6EC18 /* FMDatabaseQueue.m in Sources */,
 				43AB65571ED19D2F00A6EC18 /* main.m in Sources */,
 				43AB65581ED19D2F00A6EC18 /* DHTocBrowser.m in Sources */,
 				43AB65591ED19D2F00A6EC18 /* DHDocsetDownloader.m in Sources */,
@@ -1389,12 +1348,10 @@
 				43AB655E1ED19D2F00A6EC18 /* DHDocsetManager.m in Sources */,
 				43AB655F1ED19D2F00A6EC18 /* DHTransferFeed.m in Sources */,
 				43AB65601ED19D2F00A6EC18 /* NSFileManager+DHUtils.m in Sources */,
-				43AB65611ED19D2F00A6EC18 /* whitespace_tokenizer.c in Sources */,
 				43AB65621ED19D2F00A6EC18 /* DHJavaScriptBridge.m in Sources */,
 				43AB65631ED19D2F00A6EC18 /* NSTimer+DHUtils.m in Sources */,
 				43AB65641ED19D2F00A6EC18 /* DHTarixProtocol.m in Sources */,
 				43AB65651ED19D2F00A6EC18 /* DHTypes.m in Sources */,
-				43AB65661ED19D2F00A6EC18 /* FMDatabasePool.m in Sources */,
 				43AB65671ED19D2F00A6EC18 /* DHDocsetTransferrer.m in Sources */,
 				43AB65681ED19D2F00A6EC18 /* DHSearchDisplayController.m in Sources */,
 				43AB65691ED19D2F00A6EC18 /* DHNavigationController.m in Sources */,
@@ -1405,7 +1362,7 @@
 				43AB656E1ED19D2F00A6EC18 /* DHDBSearchController.m in Sources */,
 				43AB656F1ED19D2F00A6EC18 /* DHCheatRepoList.m in Sources */,
 				43AB65701ED19D2F00A6EC18 /* DHQueuedDB.m in Sources */,
-				43AB65711ED19D2F00A6EC18 /* FMResultSet.m in Sources */,
+				9B14768921A5E855008C4475 /* FMDatabase+DHDBAdditions.m in Sources */,
 				43AB65721ED19D2F00A6EC18 /* DHUserRepoList.m in Sources */,
 				43AB65731ED19D2F00A6EC18 /* DHUserRepo.m in Sources */,
 				43AB65741ED19D2F00A6EC18 /* DHNavigationAnimator.m in Sources */,
@@ -1436,7 +1393,6 @@
 				43BB044619ED1BB8000FBC0D /* NSObject+DHUtils.m in Sources */,
 				43915EE919C5D2FD002806FF /* UIView+DHUtils.m in Sources */,
 				438525E819C13ECE002BAFD1 /* NSString+DHUtils.m in Sources */,
-				4303A3BD19C6584F00A7CD85 /* FMDatabase.m in Sources */,
 				4398D34619BF55B500457CAF /* DHPreferences.m in Sources */,
 				437FE06619E2AC0D0022ADF4 /* DHTypeBrowser.m in Sources */,
 				435145971DEB7035000874A8 /* DHCheatRepo.m in Sources */,
@@ -1444,7 +1400,6 @@
 				43EDD19F19C52E3400A0EBEC /* DHFeedResult.m in Sources */,
 				43FD2F0219BB8D87007E594D /* DHWebViewController.m in Sources */,
 				43DCAEB81A9C3C8500A28A95 /* NSData+DHUtils.m in Sources */,
-				4303A3BE19C6584F00A7CD85 /* FMDatabaseAdditions.m in Sources */,
 				436DF78019FFA926008814F8 /* DHRepoTableView.m in Sources */,
 				43F25F9C19EBDEF30025CDC4 /* DHBlockProtocol.m in Sources */,
 				43B0956C19BFD57500F8611B /* DHRepo.m in Sources */,
@@ -1465,7 +1420,6 @@
 				437B6F8719EBC98A003023E8 /* DHCSS.m in Sources */,
 				4390520019E692D90083A55E /* DHDBResultSorter.m in Sources */,
 				432321E21AA1BBF70045BA77 /* DHRemoteBrowser.m in Sources */,
-				4303A3C119C6584F00A7CD85 /* FMDatabaseQueue.m in Sources */,
 				43FD2EF219BB8D87007E594D /* main.m in Sources */,
 				43D28EBB19F97D5500FDC5EE /* DHTocBrowser.m in Sources */,
 				43B0956F19BFDBDC00F8611B /* DHDocsetDownloader.m in Sources */,
@@ -1476,12 +1430,10 @@
 				43A6D9C919E0D69700780BC8 /* DHDocsetManager.m in Sources */,
 				437699A719D8FD3D008B37F4 /* DHTransferFeed.m in Sources */,
 				438F622419D5E81A00AF71BC /* NSFileManager+DHUtils.m in Sources */,
-				4303A3BC19C6584F00A7CD85 /* whitespace_tokenizer.c in Sources */,
 				438B45B91A10BB6F0047A156 /* DHJavaScriptBridge.m in Sources */,
 				4361651D19CCF8500026F08E /* NSTimer+DHUtils.m in Sources */,
 				430C768B19E52B7F006F0DE0 /* DHTarixProtocol.m in Sources */,
 				4303A3D419C668C200A7CD85 /* DHTypes.m in Sources */,
-				4303A3C019C6584F00A7CD85 /* FMDatabasePool.m in Sources */,
 				4341A1F619BFE89A00AD164A /* DHDocsetTransferrer.m in Sources */,
 				43F760B219EA61B5002BD8A6 /* DHSearchDisplayController.m in Sources */,
 				43DF51941A07B4C0006AB295 /* DHNavigationController.m in Sources */,
@@ -1492,7 +1444,7 @@
 				43D4F06D19E7E88400C22AF5 /* DHDBSearchController.m in Sources */,
 				4351459A1DEB7099000874A8 /* DHCheatRepoList.m in Sources */,
 				43D4F06419E7CEC500C22AF5 /* DHQueuedDB.m in Sources */,
-				4303A3BF19C6584F00A7CD85 /* FMResultSet.m in Sources */,
+				9B14768821A5E84C008C4475 /* FMDatabase+DHDBAdditions.m in Sources */,
 				43FC34041DE784C40089F134 /* DHUserRepoList.m in Sources */,
 				43280F541DDE4A7B001C2062 /* DHUserRepo.m in Sources */,
 				43B0956919BFD19900F8611B /* DHNavigationAnimator.m in Sources */,

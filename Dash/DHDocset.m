@@ -15,7 +15,12 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@import SQLite3;
+
+#import "FMDatabase+DHDBAdditions.h"
+
 #import "DHDocset.h"
+
 
 @implementation DHDocset
 

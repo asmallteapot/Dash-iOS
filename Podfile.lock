@@ -2,6 +2,8 @@ PODS:
   - AutoCoding (2.2.3)
   - DTBonjour (1.1.1)
   - DZNEmptyDataSet (1.7.3)
+  - FMDB/standalone-fts (2.7.5):
+    - sqlite3/fts
   - GZIP (1.2.2)
   - HockeySDK (5.1.4):
     - HockeySDK/DefaultLib (= 5.1.4)
@@ -41,6 +43,9 @@ PODS:
   - NSTimer-Blocks (0.0.1)
   - Reachability (3.2)
   - SAMKeychain (1.5.3)
+  - sqlite3/common (3.25.3)
+  - sqlite3/fts (3.25.3):
+    - sqlite3/common
   - "UIActionSheet+Blocks (0.9)"
   - "UIAlertView+Blocks (0.9)"
 
@@ -48,6 +53,7 @@ DEPENDENCIES:
   - AutoCoding
   - DTBonjour (from `Modified Pods/DTBonjour/DTBonjour.podspec`)
   - DZNEmptyDataSet (from `https://github.com/benrudhart/DZNEmptyDataSet.git`)
+  - FMDB/standalone-fts
   - GZIP
   - HockeySDK
   - JGMethodSwizzler
@@ -62,12 +68,14 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AutoCoding
+    - FMDB
     - GZIP
     - HockeySDK
     - JGMethodSwizzler
     - NSTimer-Blocks
     - Reachability
     - SAMKeychain
+    - sqlite3
     - "UIActionSheet+Blocks"
     - "UIAlertView+Blocks"
 
@@ -90,6 +98,7 @@ SPEC CHECKSUMS:
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
   DTBonjour: f221ef5500b109de0eb8cf0f6700c10a27cc8eb0
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GZIP: 12374d285e3b5d46cfcd480700fcfc7e16caf4f1
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   JGMethodSwizzler: e0ea5c1c6c55304ec4ef3f54e441400c6735c899
@@ -98,9 +107,10 @@ SPEC CHECKSUMS:
   NSTimer-Blocks: 88faf9aef5f250ead087f3f67ae642517083bf36
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  sqlite3: 2d1742c206acbabc99593666bd359b19223ee0d8
   "UIActionSheet+Blocks": e180b7dad0a721ab7f212ac9742af799008bb358
   "UIAlertView+Blocks": a46c99c5144f6c5dbc7d62fd2a0678daceec89a3
 
-PODFILE CHECKSUM: 8064d61fb5d3c43dcedc3f58e426589b493cdab2
+PODFILE CHECKSUM: ad42bd4cf5e873a2a52c694aca124a3017e9135d
 
 COCOAPODS: 1.6.0.beta.2

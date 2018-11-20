@@ -16,10 +16,13 @@
 //
 
 @import Foundation;
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
-#import "FMResultSet.h"
+
+#import <FMDB/FMDatabase.h>
+#import <FMDB/FMDatabaseAdditions.h>
+#import <FMDB/FMResultSet.h>
+
 #import "DHDBResult.h"
+
 
 @interface DHQueuedDB : NSObject
 
