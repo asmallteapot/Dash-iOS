@@ -255,10 +255,15 @@ static id singleton = nil;
     [self.tableView setContentOffset:CGPointMake(0, -self.tableView.contentInset.top)];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://kapeli.com/dash_itunes_file_sharing"]];
 }
+
+#pragma clang diagnostic pop
 
 - (void)viewDidLoad
 {

@@ -261,10 +261,15 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
     return 24;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
     [self openSettings:self];
 }
+
+#pragma clang diagnostic pop
 
 - (void)reload:(NSNotification *)notification
 {

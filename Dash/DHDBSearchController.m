@@ -92,6 +92,9 @@
     displayController.searchResultsDelegate = self;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
 {
     self.loading = YES;
@@ -198,6 +201,8 @@
     [self.searcher cancelSearch];
     self.searcher = nil;
 }
+
+#pragma clang diagnostic pop
 
 - (void)searcher:(DHDBSearcher *)searcher foundResults:(NSArray *)results hasMore:(BOOL)hasMore
 {
