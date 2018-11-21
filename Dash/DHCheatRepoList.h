@@ -16,7 +16,9 @@
 //
 
 @import Foundation;
-#import "DHFeed.h"
+
+@class DHFeed;
+
 
 @interface DHCheatRepoList : NSObject
 

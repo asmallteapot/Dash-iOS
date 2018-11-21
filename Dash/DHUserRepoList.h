@@ -16,7 +16,10 @@
 //
 
 @import Foundation;
-#import "DHFeed.h"
+@import UIKit;
+
+@class DHFeed;
+
 
 @interface DHUserRepoList : NSObject
 

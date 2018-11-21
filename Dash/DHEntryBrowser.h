@@ -15,7 +15,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDocsetBrowser.h"
+@import UIKit;
+
+@class DHDBSearchController;
+@class DHDocset;
 
 @interface DHEntryBrowser : UITableViewController
 

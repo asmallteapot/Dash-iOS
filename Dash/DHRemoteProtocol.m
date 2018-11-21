@@ -15,9 +15,15 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHRemoteProtocol.h"
+#import "DHRemote.h"
 #import "DHRemoteServer.h"
 #import "DHTarixProtocol.h"
+#import "NSFileManager+DHUtils.h"
+#import "NSString+DHUtils.h"
+#import "NSTimer+DHUtils.h"
+
+#import "DHRemoteProtocol.h"
+
 
 @implementation DHRemoteProtocol
 

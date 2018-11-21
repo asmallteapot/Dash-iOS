@@ -15,10 +15,19 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHEntryBrowser.h"
-#import "DHTypes.h"
+#import "DHAppDelegate.h"
+#import "DHBrowserTableViewCell.h"
 #import "DHDBResult.h"
+#import "DHDBResultSorter.h"
+#import "DHDBSearchController.h"
+#import "DHDocset.h"
 #import "DHDocsetManager.h"
+#import "DHTypes.h"
+#import "DHWebViewController.h"
+#import "UITableView+DHUtils.h"
+
+#import "DHEntryBrowser.h"
+
 
 @implementation DHEntryBrowser
 

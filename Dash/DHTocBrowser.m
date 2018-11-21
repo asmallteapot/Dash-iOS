@@ -15,11 +15,21 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHTocBrowser.h"
+#import "DHAppDelegate.h"
 #import "DHBrowserTableViewCell.h"
+#import "DHDBResult.h"
 #import "DHJavaScript.h"
+#import "DHRightDetailLabel.h"
+#import "DHRemoteServer.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+#import "UITableView+DHUtils.h"
+
+#import "DHTocBrowser.h"
+
 
 #define DHHeaderSeparatorInset 14
+
 
 @implementation DHTocBrowser
 

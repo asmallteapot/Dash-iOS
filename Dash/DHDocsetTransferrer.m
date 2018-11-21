@@ -15,9 +15,19 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDocsetTransferrer.h"
 #import "DHAppDelegate.h"
+#import "DHDocset.h"
+#import "DHDocsetIndexer.h"
+#import "DHFeedResult.h"
+#import "DHRepoTableViewCell.h"
+#import "DHRightDetailLabel.h"
 #import "DHTransferFeed.h"
+#import "NSString+DHUtils.h"
+#import "NSTimer+DHUtils.h"
+#import "NSURL+DHUtils.h"
+
+#import "DHDocsetTransferrer.h"
+
 
 @implementation DHDocsetTransferrer
 

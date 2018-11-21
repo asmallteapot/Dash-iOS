@@ -15,11 +15,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@import DZNEmptyDataSet;
 @import UIKit;
-#import "DHWebViewController.h"
-#import "DHBrowserTableViewCell.h"
-#import "DHDBSearchController.h"
+
 #import "DHBrowserTableView.h"
+
+@class DHDBSearchController;
+@class DHDocset;
+
 
 @interface DHDocsetBrowser : UITableViewController <UINavigationControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DHBrowserTableViewDelegate>
 

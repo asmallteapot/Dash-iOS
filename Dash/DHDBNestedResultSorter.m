@@ -15,8 +15,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDBNestedResultSorter.h"
 #import "DHDBResult.h"
+#import "NSString+DHUtils.h"
+
+#import "DHDBNestedResultSorter.h"
+
 
 @implementation DHDBNestedResultSorter
 

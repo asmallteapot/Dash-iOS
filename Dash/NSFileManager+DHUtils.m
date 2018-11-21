@@ -15,7 +15,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#import "DHTarixIndex.h"
+#import "NSString+DHUtils.h"
+
 #import "NSFileManager+DHUtils.h"
+
 
 @implementation NSFileManager (DHUtils)
 

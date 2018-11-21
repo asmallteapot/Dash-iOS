@@ -16,7 +16,8 @@
 //
 
 @import Foundation;
-#import "DHFileDownload.h"
+
+@class DHFileDownload;
 
 @interface DHFeedResult : NSObject
 

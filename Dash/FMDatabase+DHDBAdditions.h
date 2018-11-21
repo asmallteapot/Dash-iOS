@@ -6,7 +6,8 @@
 //  Copyright © 2018 Kapeli. All rights reserved.
 //
 
-#import "FMDatabase.h"
+@import FMDB;
+
 
 NS_ASSUME_NONNULL_BEGIN
 

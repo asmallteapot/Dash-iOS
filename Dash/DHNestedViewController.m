@@ -15,8 +15,25 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHNestedViewController.h"
+@import UIAlertView_Blocks;
+
+#import "DHAppDelegate.h"
 #import "DHBrowserTableViewCell.h"
+#import "DHDBNestedResultSorter.h"
+#import "DHDBResult.h"
+#import "DHDBResultSorter.h"
+#import "DHDocset.h"
+#import "DHRemote.h"
+#import "DHRemoteServer.h"
+#import "DHRightDetailLabel.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+#import "NSURL+DHUtils.h"
+#import "UITableView+DHUtils.h"
+#import "UIView+DHUtils.h"
+
+#import "DHNestedViewController.h"
+
 
 @implementation DHNestedViewController
 

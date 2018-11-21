@@ -16,7 +16,10 @@
 //
 
 #import "NSObject+DHUtils.h"
+
 #import "DHJavaScriptBridge.h"
+#import "NSArray+DHUtils.h"
+
 
 @implementation NSObject (DHUtils)
 

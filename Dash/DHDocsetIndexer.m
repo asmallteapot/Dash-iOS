@@ -15,9 +15,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDocsetIndexer.h"
-#import "DHTypes.h"
+#import "DHDocset.h"
 #import "DHFeedResult.h"
+#import "DHTypes.h"
+#import "NSString+DHUtils.h"
+
+#import "DHDocsetIndexer.h"
+
 
 @implementation DHDocsetIndexer
 

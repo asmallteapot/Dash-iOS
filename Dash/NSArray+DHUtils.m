@@ -15,7 +15,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#import "NSString+DHUtils.h"
+
 #import "NSArray+DHUtils.h"
+
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 #include <net/if.h>

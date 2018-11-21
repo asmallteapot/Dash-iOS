@@ -16,8 +16,13 @@
 //
 
 @import Foundation;
-#import "DHRepoTableViewCell.h"
-#import "DHFeedResult.h"
+@import QuartzCore;
+@import UIKit;
+
+@class DHFeed;
+@class DHFeedResult;
+@class DHRepoTableViewCell;
+
 
 @interface DHFeed : NSObject
 

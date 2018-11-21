@@ -15,8 +15,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHTransferFeed.h"
+#import "DHDocset.h"
 #import "DHDocsetTransferrer.h"
+
+#import "DHTransferFeed.h"
+
 
 @implementation DHTransferFeed
 

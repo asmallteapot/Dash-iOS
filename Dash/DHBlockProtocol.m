@@ -15,10 +15,15 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHBlockProtocol.h"
-#import "DHWebViewController.h"
+#import "DHDocset.h"
 #import "DHDocsetManager.h"
 #import "DHRemoteProtocol.h"
+#import "DHRemoteServer.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+
+#import "DHBlockProtocol.h"
+
 
 @implementation DHBlockProtocol
 

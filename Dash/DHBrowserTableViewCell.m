@@ -17,6 +17,10 @@
 
 #import "DHBrowserTableViewCell.h"
 
+#import "DHRightDetailLabel.h"
+#import "UIView+DHUtils.h"
+
+
 @implementation DHBrowserTableViewCell
 
 - (void)awakeFromNib

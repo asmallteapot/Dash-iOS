@@ -16,7 +16,9 @@
 //
 
 @import UIKit;
-#import "DHRightDetailLabel.h"
+
+@class DHRightDetailLabel;
+
 
 @interface DHBrowserTableViewCell : UITableViewCell
 

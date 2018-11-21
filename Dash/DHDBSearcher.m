@@ -16,9 +16,13 @@
 //
 
 #import "DHDBSearcher.h"
+
+#import "DHDBResult.h"
+#import "DHDBNestedResultSorter.h"
+#import "DHDocset.h"
 #import "DHQueuedDB.h"
 #import "DHTypes.h"
-#import "DHDBNestedResultSorter.h"
+
 
 @implementation DHDBSearcher
 

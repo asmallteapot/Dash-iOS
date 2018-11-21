@@ -22,7 +22,12 @@
 // THE SOFTWARE.
 //
 
+@import NSTimer_Blocks;
+
+#import "NSTimer+DHUtils.h"
+
 #import "DHWebProgressView.h"
+
 
 @implementation DHWebProgressView
 

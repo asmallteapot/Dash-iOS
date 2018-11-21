@@ -15,13 +15,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHUnarchiver.h"
-
+@import FMDB;
 @import SQLite3;
+@import zlib;
 
 #import "archive.h"
 #import "archive_entry.h"
-#import "zlib.h"
+#import "DHTarixIndex.h"
+#import "NSString+DHUtils.h"
+
+#import "DHUnarchiver.h"
+
 
 @implementation DHUnarchiver
 

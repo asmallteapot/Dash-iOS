@@ -16,7 +16,10 @@
 //
 
 @import Foundation;
+@import UIKit;
+
 #import "DHDBSearcher.h"
+
 
 @interface DHDBSearchController : NSObject <UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, DHDBSearcherDelegate>
 

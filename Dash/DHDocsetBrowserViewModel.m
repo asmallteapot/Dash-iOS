@@ -1,7 +1,9 @@
 
 #import "DHDocsetBrowserViewModel.h"
+
 #import "DHDocsetManager.h"
 #import "DHDocsetDownloader.h"
+#import "DHRemoteServer.h"
 
 @interface DHDocsetBrowserViewModel ()
 @property (nonatomic, strong) NSArray *sections;

@@ -15,15 +15,15 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@import FMDB;
+@import Foundation;
 @import SQLite3;
-
-#import <FMDB/FMDatabase.h>
-#import <FMDB/FMDatabaseAdditions.h>
-#import <FMDB/FMResultSet.h>
 
 #import "DHDBResult.h"
 #import "DHDBSearcher.h"
+#import "DHDocset.h"
 #import "FMDatabase+DHDBAdditions.h"
+#import "NSString+DHUtils.h"
 
 #import "DHQueuedDB.h"
 

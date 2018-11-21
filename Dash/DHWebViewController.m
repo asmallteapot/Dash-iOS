@@ -15,10 +15,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHWebViewController.h"
-#import "DHWebViewController.h"
+@import JGMethodSwizzler;
+
 #import "DHNavigationAnimator.h"
-#import "JGMethodSwizzler.h"
+#import "DHDocset.h"
 #import "DHDocsetManager.h"
 #import "DHJavaScript.h"
 #import "DHCSS.h"
@@ -26,10 +26,20 @@
 #import "DHUnarchiver.h"
 #import "DHTocBrowser.h"
 #import "DHJavaScriptBridge.h"
+#import "DHRemote.h"
 #import "DHRemoteProtocol.h"
+#import "DHRemoteServer.h"
 #import "DHTypeBrowser.h"
 #import "DHEntryBrowser.h"
 #import "DHWebView.h"
+#import "DHDBResult.h"
+#import "DHWebProgressView.h"
+#import "NSObject+DHUtils.h"
+#import "NSString+DHUtils.h"
+#import "UIViewController+DHUtils.h"
+
+#import "DHWebViewController.h"
+
 
 @implementation DHWebViewController
 

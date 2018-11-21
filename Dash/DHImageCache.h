@@ -16,6 +16,8 @@
 //
 
 @import Foundation;
+@import UIKit;
+
 
 @interface DHImageCache : NSObject
 

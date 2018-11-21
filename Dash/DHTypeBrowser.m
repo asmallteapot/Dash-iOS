@@ -15,9 +15,22 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHTypeBrowser.h"
-#import "DHTypes.h"
+#import "DHAppDelegate.h"
+#import "DHAppleActiveLanguage.h"
+#import "DHBrowserTableViewCell.h"
+#import "DHDBSearchController.h"
+#import "DHDocset.h"
+#import "DHDocsetBrowser.h"
 #import "DHDocsetManager.h"
+#import "DHRightDetailLabel.h"
+#import "DHTypes.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+#import "UITableView+DHUtils.h"
+#import "UIViewController+DHUtils.h"
+
+#import "DHTypeBrowser.h"
+
 
 @implementation DHTypeBrowser
 

@@ -15,10 +15,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <FMDB/FMDatabase.h>
+@import FMDB;
+@import Foundation;
 @import SQLite3;
 
+#import "NSString+DHUtils.h"
+
 #import "DHTarixIndex.h"
+
 
 @implementation DHTarixIndex
 

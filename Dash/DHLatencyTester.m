@@ -16,7 +16,10 @@
 //
 
 #import "DHLatencyTester.h"
+
 #import "DHLatencyTestResult.h"
+#import "NSString+DHUtils.h"
+
 
 @implementation DHLatencyTester
 

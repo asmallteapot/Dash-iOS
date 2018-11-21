@@ -15,12 +15,19 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHAppleAPIProtocol.h"
 @import Apple_Docs_Framework;
+
+#import "DHAppDelegate.h"
+#import "DHAppleActiveLanguage.h"
+#import "DHDocset.h"
 #import "DHDocsetManager.h"
 #import "DHLatencyTester.h"
-#import "DHWebViewController.h"
 #import "DHTocBrowser.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+
+#import "DHAppleAPIProtocol.h"
+
 
 @implementation DHAppleAPIProtocol
 

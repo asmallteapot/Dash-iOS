@@ -15,9 +15,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@import DTBonjour;
 @import Foundation;
-#import "DTBonjourServer.h"
-#import "DHRemote.h"
+
+@class DHRemote;
+
 
 @interface DHRemoteServer : NSObject <DTBonjourServerDelegate>
 

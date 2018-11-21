@@ -16,6 +16,8 @@
 //
 
 @import Foundation;
+@import UIKit;
+
 
 @interface DHNavigationAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 

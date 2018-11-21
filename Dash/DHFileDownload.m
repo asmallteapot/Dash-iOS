@@ -16,7 +16,11 @@
 //
 
 #import "DHFileDownload.h"
+
 #import "DHFeedResult.h"
+#import "NSString+DHUtils.h"
+#import "NSURL+DHUtils.h"
+
 
 @implementation DHFileDownload
 

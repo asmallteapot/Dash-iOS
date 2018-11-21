@@ -16,10 +16,11 @@
 //
 
 @import UIKit;
-#import "MRProgress.h"
-#import "DHRightDetailLabel.h"
+@import MRProgress;
 
 @class DHFeed;
+@class DHRightDetailLabel;
+
 
 @interface DHRepoTableViewCell : UITableViewCell
 

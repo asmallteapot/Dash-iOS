@@ -1,4 +1,5 @@
 #import "NSString+GTM.h"
+#import "NSString+DHUtils.h"
 
 typedef struct {
     NSString *escapeSequence;

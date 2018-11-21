@@ -16,8 +16,9 @@
 //
 
 @import UIKit;
-#import "DHDBResult.h"
-#import "DHWebViewController.h"
+
+@class DHDBResult;
+
 
 @interface DHNestedViewController : UITableViewController
 

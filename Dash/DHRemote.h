@@ -16,8 +16,10 @@
 //
 
 @import Foundation;
+@import UIKit;
 
 @class DHRemoteBrowser;
+
 
 @interface DHRemote : NSObject
 

@@ -15,23 +15,39 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDocsetBrowser.h"
-#import "DHWebViewController.h"
-#import "DHPreferences.h"
-#import "DHNavigationAnimator.h"
-#import "DHRepo.h"
-#import "DHDocsetManager.h"
 #import "DHAppDelegate.h"
-#import "DHDocsetDownloader.h"
-#import "DHRemoteBrowser.h"
-#import "DHWebView.h"
+#import "DHBrowserTableView.h"
+#import "DHBrowserTableViewCell.h"
+#import "DHDBSearchController.h"
+#import "DHDocset.h"
 #import "DHDocsetBrowserViewModel.h"
+#import "DHDocsetDownloader.h"
+#import "DHDocsetManager.h"
+#import "DHNavigationAnimator.h"
+#import "DHPreferences.h"
+#import "DHRemote.h"
+#import "DHRemoteBrowser.h"
+#import "DHRemoteServer.h"
+#import "DHRightDetailLabel.h"
+#import "DHTocBrowser.h"
+#import "DHTypeBrowser.h"
+#import "DHRepo.h"
+#import "DHWebView.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+#import "UITableView+DHUtils.h"
+#import "UIViewController+DHUtils.h"
+
+#import "DHDocsetBrowser.h"
+
 
 static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
+
 
 @interface DHDocsetBrowser ()
 @property (nonatomic, strong) DHDocsetBrowserViewModel *viewModel;
 @end
+
 
 @implementation DHDocsetBrowser
 
@@ -49,9 +65,9 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
     self.viewModel = [[DHDocsetBrowserViewModel alloc] init];
     self.clearsSelectionOnViewWillAppear = NO;
     self.searchController = [DHDBSearchController searchControllerWithDocsets:nil typeLimit:nil viewController:self];
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:@"DHBrowserCell" bundle:nil] forCellReuseIdentifier:@"DHBrowserCell"];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:DHDocsetsChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:DHRemotesChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:DHSettingsChangedNotification object:nil];
@@ -88,7 +104,7 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
     [super viewWillAppear:animated];
     if(!self.isEditing)
     {
-        [self.tableView deselectAll:YES];        
+        [self.tableView deselectAll:YES];
     }
     [self.searchController viewWillAppear];
     if([DHRemoteServer sharedServer].connectedRemote)
@@ -213,7 +229,7 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    
+
     NSString *text = @"You can download some in Settings.";
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;
@@ -319,7 +335,7 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DHBrowserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DHBrowserCell" forIndexPath:indexPath];
-    
+
     DHDocset *docset = self.sections[indexPath.section][indexPath.row];
     cell.textLabel.text = docset.name;
     cell.detailTextLabel.text = @"";
@@ -522,8 +538,9 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
     {
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
         DHDocset *selectedDocset = self.sections[indexPath.section][indexPath.row];
-        id typeBrowser = [segue destinationViewController];
-        [typeBrowser setDocset:selectedDocset];
+        DHTypeBrowser *typeBrowser = [segue destinationViewController];
+        NSAssert([typeBrowser isKindOfClass:[DHTypeBrowser class]], @"Expected segue destination to be kind of class DHTypeBrowser");
+        typeBrowser.docset = selectedDocset;
     }
     else if([[segue identifier] isEqualToString:@"DHRemoteBrowserSegue"])
     {
@@ -551,7 +568,7 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
     {
         if(![fromVC isKindOfClass:[DHRepo class]] && ![toVC isKindOfClass:[DHRepo class]])
         {
-            return [[DHNavigationAnimator alloc] init];            
+            return [[DHNavigationAnimator alloc] init];
         }
     }
     return nil;

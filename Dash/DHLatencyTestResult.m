@@ -15,8 +15,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHLatencyTestResult.h"
 #import "DHLatencyTester.h"
+#import "NSString+DHUtils.h"
+
+#import "DHLatencyTestResult.h"
+
 
 @implementation DHLatencyTestResult
 

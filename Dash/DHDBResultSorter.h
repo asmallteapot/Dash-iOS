@@ -16,8 +16,11 @@
 //
 
 @import Foundation;
+@import QuartzCore;
+@import UIKit;
 
 @class DHDBResult;
+
 
 @interface DHDBResultSorter : NSObject
 

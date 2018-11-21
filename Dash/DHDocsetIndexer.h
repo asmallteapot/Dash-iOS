@@ -17,6 +17,9 @@
 
 @import Foundation;
 
+@class DHDocset;
+
+
 @interface DHDocsetIndexer : NSObject
 
 @property (weak) id delegate;

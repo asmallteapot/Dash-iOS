@@ -15,7 +15,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@import UIKit;
+
 #import "DHRemoteImage.h"
+
 
 @implementation DHRemoteImage
 

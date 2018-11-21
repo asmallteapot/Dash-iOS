@@ -15,7 +15,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#import "DHAppDelegate.h"
+#import "DHRepoTableViewCell.h"
+#import "DHFeedResult.h"
+#import "DHRightDetailLabel.h"
+#import "NSString+DHUtils.h"
+
 #import "DHFeed.h"
+
 
 @implementation DHFeed
 

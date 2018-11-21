@@ -15,9 +15,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDBResult.h"
 #import "DHAppDelegate.h"
+#import "DHAppleActiveLanguage.h"
 #import "DHCSS.h"
+#import "DHDBResultSorter.h"
+#import "DHDocset.h"
+#import "NSFileManager+DHUtils.h"
+#import "NSString+DHUtils.h"
+#import "NSString+GTM.h"
+
+#import "DHDBResult.h"
+
 
 @implementation DHDBResult
 

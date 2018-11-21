@@ -15,17 +15,32 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHRemoteServer.h"
-#import "SAMKeychain.h"
-#import "DHDocsetManager.h"
-#import "DHRemoteImage.h"
-#import "Reachability.h"
-#import "DHDBResult.h"
-#import "DHRemoteBrowser.h"
-#import "DHNestedViewController.h"
-#import "DHRemoteProtocol.h"
+@import DTBonjour;
+@import GZIP;
+@import NSTimer_Blocks;
+@import Reachability;
+@import SAMKeychain;
+@import UIAlertView_Blocks;
+
+#import "DHAppDelegate.h"
+#import "DHAppleActiveLanguage.h"
 #import "DHCSS.h"
+#import "DHDBResult.h"
+#import "DHDocsetManager.h"
+#import "DHNestedViewController.h"
+#import "DHRemote.h"
+#import "DHRemoteBrowser.h"
+#import "DHRemoteImage.h"
+#import "DHRemoteProtocol.h"
 #import "DHTocBrowser.h"
+#import "DHWebViewController.h"
+#import "NSArray+DHUtils.h"
+#import "NSData+DHUtils.h"
+#import "NSString+DHUtils.h"
+#import "NSTimer+DHUtils.h"
+
+#import "DHRemoteServer.h"
+
 
 @implementation DHRemoteServer
 
@@ -33,7 +48,7 @@
 {
     static dispatch_once_t pred;
     static DHRemoteServer *_server = nil;
-    
+
     dispatch_once(&pred, ^{
         _server = [[DHRemoteServer alloc] init];
         [_server setUp];
@@ -50,11 +65,11 @@
     self.remotes = [NSMutableArray array];
     self.connections = [NSMutableDictionary dictionary];
     self.lastDecryptFailDates = [NSMutableDictionary dictionary];
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self startServer];
     });
-    
+
     Reachability *reach = [Reachability reachabilityForLocalWiFi];
     reach.reachableOnWWAN = NO;
     reach.reachableBlock = ^(Reachability *theReach) {
@@ -132,7 +147,7 @@
     {
         if(controller.methodsPopover.popoverVisible)
         {
-            [controller.methodsPopover dismissPopoverAnimated:YES];            
+            [controller.methodsPopover dismissPopoverAnimated:YES];
         }
     }
     else
@@ -213,11 +228,11 @@
             userInfo = (userInfo) ? (id)[(id)userInfo gunzippedData] : nil;
         }
         userInfo = (userInfo) ? [NSKeyedUnarchiver unarchiveObjectWithData:(NSData*)userInfo] : nil;
-        
+
         NSLog(@"received %@", requestName);
 #pragma mark Start handling requests
-        
-        
+
+
 #pragma mark Enforce encrypted routes
         NSArray *allowedUnencrypted = @[@"pairRequest", @"loadRequestResponse"];
         if(!isEncrypted && ![allowedUnencrypted containsObject:requestName])
@@ -232,7 +247,7 @@
 #endif
             return;
         }
-        
+
         self.connections[macName] = connection;
 
 #pragma mark Route: pairRequest
@@ -264,13 +279,13 @@
                 }
             }];
         }
-        
+
 #pragma mark Route: pairHello
         if([requestName isEqualToString:@"pairHello"])
         {
             [self sendObject:nil forRequestName:@"pairHello" encrypted:YES toMacName:macName];
         }
-        
+
 #pragma mark Route: readyToConnect
         if([requestName isEqualToString:@"readyToConnect"])
         {
@@ -286,7 +301,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:DHRemotesChangedNotification object:nil];
             }
         }
-        
+
 #pragma mark Route: unpair
         if([requestName isEqualToString:@"unpair"])
         {
@@ -301,7 +316,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:DHRemotesChangedNotification object:nil];
             }
         }
-        
+
 #pragma mark Route: syncResults
         if([requestName isEqualToString:@"syncResults"])
         {
@@ -329,7 +344,7 @@
                 }
             }
         }
-        
+
 #pragma mark Route: syncSelectedRow
         if([requestName isEqualToString:@"syncSelectedRow"])
         {
@@ -369,7 +384,7 @@
                 }
             }
         }
-        
+
 #pragma mark Route: syncWebViewURL
         if([requestName isEqualToString:@"syncWebViewURL"])
         {
@@ -395,7 +410,7 @@
                 }
             }
         }
-        
+
 #pragma mark Route: loadRequestResponse
         if([requestName isEqualToString:@"loadRequestResponse"])
         {
@@ -414,7 +429,7 @@
                 }
             }
         }
-        
+
 #pragma mark Route: syncAppleLanguage
         if([requestName isEqualToString:@"syncAppleLanguage"])
         {
@@ -431,8 +446,8 @@
                 }
             }
         }
-        
-        
+
+
 #pragma mark Route: syncNewAppleLanguage
         if([requestName isEqualToString:@"syncNewAppleLanguage"])
         {
@@ -442,7 +457,7 @@
                 [DHAppleActiveLanguage setLanguage:[userInfo[@"language"] integerValue]];
             }
         }
-        
+
 #pragma mark Route: syncTableOfContents
         if([requestName isEqualToString:@"syncTableOfContents"])
         {

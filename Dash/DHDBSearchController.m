@@ -15,12 +15,20 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDBSearchController.h"
+#import "DHAppDelegate.h"
 #import "DHBrowserTableViewCell.h"
 #import "DHDBResult.h"
+#import "DHDBResultSorter.h"
+#import "DHDBSearcher.h"
 #import "DHDocsetManager.h"
 #import "DHDocsetBrowser.h"
 #import "DHNestedViewController.h"
+#import "DHRightDetailLabel.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+
+#import "DHDBSearchController.h"
+
 
 @implementation DHDBSearchController
 

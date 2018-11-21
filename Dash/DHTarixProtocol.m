@@ -16,10 +16,13 @@
 //
 
 #import "DHTarixProtocol.h"
+
 #import "DHUnarchiver.h"
 #import "DHCSS.h"
 #import "DHWebViewController.h"
 #import "DHWebView.h"
+#import "NSString+DHUtils.h"
+
 
 @implementation DHTarixProtocol
 

@@ -1,4 +1,6 @@
+@import Foundation;
 @import UIKit;
+
 
 @interface DHWebProgressView : UIView
 

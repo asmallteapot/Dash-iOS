@@ -15,12 +15,12 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@import DZNEmptyDataSet;
+@import MRProgress;
 @import UIKit;
-#import "DHRepoTableViewCell.h"
-#import "DHLatencyTester.h"
-#import "MRProgress.h"
-#import "DHDocsetIndexer.h"
-#import "DHUnarchiver.h"
+
+@class DHFeed;
+
 
 @interface DHRepo : UITableViewController <UIActionSheetDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 

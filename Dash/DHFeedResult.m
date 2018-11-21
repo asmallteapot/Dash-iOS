@@ -15,9 +15,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHFeedResult.h"
+@import UIKit;
+
 #import "DHFeed.h"
+#import "DHFileDownload.h"
+#import "DHRepoTableViewCell.h"
+#import "DHRightDetailLabel.h"
 #import "DHTransferFeed.h"
+#import "NSString+DHUtils.h"
+
+#import "DHFeedResult.h"
+
 
 @implementation DHFeedResult
 

@@ -16,7 +16,11 @@
 //
 
 #import "DHUserRepoList.h"
+
+#import "DHFeed.h"
 #import "DHLatencyTester.h"
+#import "NSString+DHUtils.h"
+
 
 @implementation DHUserRepoList
 

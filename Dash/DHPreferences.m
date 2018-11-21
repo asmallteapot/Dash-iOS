@@ -16,10 +16,13 @@
 //
 
 #import "DHPreferences.h"
-#import "DHWebViewController.h"
+
 #import "DHAppDelegate.h"
 #import "DHDocsetDownloader.h"
 #import "DHDocsetTransferrer.h"
+#import "DHWebViewController.h"
+#import "UITableView+DHUtils.h"
+
 
 @implementation DHPreferences
 

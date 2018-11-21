@@ -17,6 +17,7 @@
 
 @import UIKit;
 
+
 @interface DHRightDetailLabel : UILabel
 
 @property (strong) NSString *_rightDetailText;

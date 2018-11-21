@@ -16,11 +16,11 @@
 //
 
 @import Foundation;
+@import UIKit;
+
 
 // Convenience NSString methods used throughout
-@interface NSString (DHUtils) {
-    
-}
+@interface NSString (DHUtils)
 
 - (NSString *)stringByDeletingPathFragment;
 - (NSString *)pathFragment;

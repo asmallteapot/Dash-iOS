@@ -15,24 +15,38 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHAppDelegate.h"
-#import "DHDocsetDownloader.h"
-#import "DHUserRepo.h"
-#import "DHCheatRepo.h"
-#import "DHDocsetTransferrer.h"
-#import "DHDocsetManager.h"
-#import "DHTarixProtocol.h"
-#import "DHBlockProtocol.h"
-#import "DHAppleAPIProtocol.h"
-#import "DHCSS.h"
-#import "DHWebViewController.h"
-#import "DHAppUpdateChecker.h"
-#import "DHDocsetBrowser.h"
+@import Foundation;
+@import NSTimer_Blocks;
+@import UIKit;
+
 #ifdef APP_STORE
-#import <HockeySDK/HockeySDK.h>
+@import HockeySDK;
 #endif
-#import "DHRemoteServer.h"
+
+#import "DHAppUpdateChecker.h"
+#import "DHAppleAPIProtocol.h"
+#import "DHBlockProtocol.h"
+#import "DHCSS.h"
+#import "DHCheatRepo.h"
+#import "DHDBResultSorter.h"
+#import "DHDBNestedResultSorter.h"
+#import "DHDocset.h"
+#import "DHDocsetBrowser.h"
+#import "DHDocsetDownloader.h"
+#import "DHDocsetManager.h"
+#import "DHDocsetTransferrer.h"
+#import "DHRemote.h"
 #import "DHRemoteProtocol.h"
+#import "DHRemoteServer.h"
+#import "DHTarixProtocol.h"
+#import "DHUserRepo.h"
+#import "DHWebViewController.h"
+#import "DHWindow.h"
+#import "NSString+DHUtils.h"
+#import "NSTimer+DHUtils.h"
+
+#import "DHAppDelegate.h"
+
 
 @implementation DHAppDelegate
 

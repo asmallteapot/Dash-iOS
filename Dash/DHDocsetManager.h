@@ -17,6 +17,9 @@
 
 @import Foundation;
 
+@class DHDocset;
+
+
 @interface DHDocsetManager : NSObject
 
 @property (strong) NSMutableArray *docsets;

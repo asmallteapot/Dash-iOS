@@ -16,8 +16,11 @@
 //
 
 @import Foundation;
-#import "DHDocset.h"
-#import "DHDBResultSorter.h"
+@import FMDB;
+@import UIKit;
+
+@class DHDocset;
+
 
 @interface DHDBResult : NSObject
 

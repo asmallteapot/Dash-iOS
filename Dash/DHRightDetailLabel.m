@@ -15,7 +15,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#import "NSString+DHUtils.h"
+#import "UIView+DHUtils.h"
+
 #import "DHRightDetailLabel.h"
+
 
 @implementation DHRightDetailLabel
 

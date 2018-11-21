@@ -1,6 +1,7 @@
 project 'Dash/Dash iOS.xcodeproj'
 platform :ios, '9.0'
 inhibit_all_warnings!
+use_modular_headers!
 
 target 'Dash' do
   pod 'AutoCoding'

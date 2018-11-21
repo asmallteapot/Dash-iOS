@@ -15,7 +15,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@import UIAlertView_Blocks;
+@import UIKit;
+
 #import "DHAppUpdateChecker.h"
+
 
 #define DHAppUpdateCheckerLastCheckDate @"DHAppUpdateCheckerLastCheckDate"
 #define DHAppUpdateCheckerScheduledUpdateVersion @"DHAppUpdateCheckerScheduledUpdateVersion"

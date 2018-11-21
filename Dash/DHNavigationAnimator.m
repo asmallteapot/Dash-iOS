@@ -15,9 +15,12 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHNavigationAnimator.h"
+#import "DHAppDelegate.h"
 #import "DHPreferences.h"
 #import "DHWebViewController.h"
+
+#import "DHNavigationAnimator.h"
+
 
 @implementation DHNavigationAnimator
 

@@ -16,6 +16,8 @@
 //
 
 @import Foundation;
+@import QuartzCore;
+
 
 @interface DHJavaScript : NSObject
 

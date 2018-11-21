@@ -1,5 +1,7 @@
-
 @import Foundation;
+
+@class DHDocset;
+
 
 @interface DHDocsetBrowserViewModel : NSObject
 @property (nonatomic, strong, readonly) NSArray *sections;

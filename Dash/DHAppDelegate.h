@@ -16,7 +16,9 @@
 //
 
 @import UIKit;
-#import "DHWindow.h"
+
+@class DHWindow;
+
 
 @interface DHAppDelegate : UIResponder <UIApplicationDelegate>
 

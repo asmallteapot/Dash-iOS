@@ -16,7 +16,9 @@
 //
 
 #import "DHFeed.h"
-#import "DHDocset.h"
+
+@class DHDocset;
+
 
 @interface DHTransferFeed : DHFeed
 

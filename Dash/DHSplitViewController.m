@@ -15,12 +15,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHSplitViewController.h"
-#import "DHWebViewController.h"
-#import "DHRepo.h"
-#import "DHPreferences.h"
-#import "DHTocBrowser.h"
+#import "DHAppDelegate.h"
+#import "DHDBSearchController.h"
 #import "DHDocsetBrowser.h"
+#import "DHPreferences.h"
+#import "DHRepo.h"
+#import "DHTocBrowser.h"
+#import "DHWebViewController.h"
+#import "NSString+DHUtils.h"
+
+#import "DHSplitViewController.h"
+
 
 @implementation DHSplitViewController
 

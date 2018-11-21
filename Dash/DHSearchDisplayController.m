@@ -15,9 +15,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHSearchDisplayController.h"
+@import JGMethodSwizzler;
+
+#import "DHAppDelegate.h"
 #import "DHNestedViewController.h"
-#import "JGMethodSwizzler.h"
+
+#import "DHSearchDisplayController.h"
+
 
 @interface UISearchDisplayController (DHUtils)
 

@@ -15,13 +15,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@import UIKit;
-@import WebKit;
-#import "DHDBResult.h"
 @import JavaScriptCore;
-#import "DHWebProgressView.h"
+@import WebKit;
+@import UIKit;
 
+@class DHDBResult;
 @class DHTocBrowser;
+@class DHWebProgressView;
+
 
 @interface DHWebViewController : UIViewController <UISplitViewControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate, UIScrollViewDelegate>
 

@@ -17,7 +17,11 @@
 
 @import SQLite3;
 
+#import "DHAppleActiveLanguage.h"
+#import "NSFileManager+DHUtils.h"
+#import "DHImageCache.h"
 #import "FMDatabase+DHDBAdditions.h"
+#import "NSString+DHUtils.h"
 
 #import "DHDocset.h"
 

@@ -15,12 +15,25 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "DHDocsetDownloader.h"
+
 #import "DHAppDelegate.h"
-#import "DHFeed.h"
-#import "DDXML.h"
-#import "DHFeedResult.h"
+#import "DHDocset.h"
+#import "DHDocsetIndexer.h"
 #import "DHDocsetManager.h"
+#import "DHFeed.h"
+#import "DHFeedResult.h"
+#import "DHFileDownload.h"
+#import "DHLatencyTester.h"
+#import "DHRepoTableViewCell.h"
+#import "DHRightDetailLabel.h"
+#import "DHUnarchiver.h"
+#import "DDXML.h"
+#import "NSFileManager+DHUtils.h"
+#import "NSString+DHUtils.h"
+#import "NSURL+DHUtils.h"
+
+#import "DHDocsetDownloader.h"
+
 
 @implementation DHDocsetDownloader
 
