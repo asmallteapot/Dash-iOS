@@ -17,6 +17,16 @@
 
 @import Foundation;
 
+
+extern NSString * const DHActiveAppleLanguageKey;
+
+typedef NS_ENUM(NSInteger, DHActiveAppleLanguage) {
+    DHActiveAppleLanguageBoth = 0,
+    DHActiveAppleLanguageSwift = 1,
+    DHActiveAppleLanguageObjC = 2
+};
+
+
 @interface DHCSS : NSObject
 
 @property (strong) NSString *bothCSS;
@@ -26,15 +36,10 @@
 + (DHCSS *)sharedCSS;
 + (NSString *)currentCSSString;
 + (NSString *)currentCSSStringWithTextModifier;
-+ (int)activeAppleLanguage;
++ (DHActiveAppleLanguage)activeAppleLanguage;
 - (void)refreshActiveCSS;
 - (void)modifyTextSize:(BOOL)increase;
 - (BOOL)shouldModifyTextSize;
 - (NSString *)textSizeAdjust;
 
 @end
-
-#define DHActiveAppleLanguageKey @"ActiveAppleLanguage"
-#define DHActiveAppleLanguageBoth 0
-#define DHActiveAppleLanguageSwift 1
-#define DHActiveAppleLanguageObjC 2

@@ -31,12 +31,14 @@
 #import "DHRemoteServer.h"
 #import "DHTypeBrowser.h"
 #import "DHEntryBrowser.h"
-#import "DHWebView.h"
 #import "DHDBResult.h"
+#import "DHURLSearch.h"
+#import "DHWebView.h"
 #import "DHWebProgressView.h"
 #import "NSObject+DHUtils.h"
 #import "NSString+DHUtils.h"
 #import "UIViewController+DHUtils.h"
+#import "DHStorageController.h"
 
 #import "DHWebViewController.h"
 
@@ -760,7 +762,7 @@ static id singleton = nil;
 {
     [super encodeRestorableStateWithCoder:coder];
     [coder encodeObject:self.webView.request.URL.absoluteString forKey:@"webViewURL"];
-    [coder encodeObject:homePath forKey:@"homePath"];
+    [coder encodeObject:[[DHStorageController sharedController] libraryPath] forKey:@"homePath"];
     [coder encodeCGPoint:self.webView.scrollView.contentOffset forKey:@"webViewOffset"];
 }
 
@@ -771,7 +773,7 @@ static id singleton = nil;
     NSString *lastHomePath = [coder decodeObjectForKey:@"homePath"];
     self.webViewOffset = [coder decodeCGPointForKey:@"webViewOffset"];
     if (lastHomePath) {
-        loadURL = [[loadURL stringByReplacingOccurrencesOfString:lastHomePath withString:homePath] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        loadURL = [[loadURL stringByReplacingOccurrencesOfString:lastHomePath withString:[[DHStorageController sharedController] libraryPath]] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     
     self.isRestoring = YES;

@@ -17,6 +17,9 @@
 
 @import UIKit;
 
-@interface DHWindow : UIWindow
 
+extern NSString * const DHWindowChangedTraitCollection;
+
+
+@interface DHWindow : UIWindow
 @end

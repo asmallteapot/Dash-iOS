@@ -21,6 +21,9 @@
 @class DHRemote;
 
 
+extern NSString * const DHRemotesChangedNotification;
+
+
 @interface DHRemoteServer : NSObject <DTBonjourServerDelegate>
 
 @property (strong) DTBonjourServer *server;
@@ -41,5 +44,3 @@
 - (void)processRemoteTableOfContents;
 
 @end
-
-#define DHRemotesChangedNotification @"DHRemotesChangedNotification"

@@ -27,6 +27,10 @@
 #import "DHSplitViewController.h"
 
 
+NSString * const DHSplitViewControllerDidSeparate = @"DHSplitViewControllerDidSeparate";
+NSString * const DHSplitViewControllerDidCollapse = @"DHSplitViewControllerDidCollapse";
+
+
 @implementation DHSplitViewController
 
 - (void)viewDidLoad

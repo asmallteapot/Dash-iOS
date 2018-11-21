@@ -22,6 +22,9 @@
 @class DHFeed;
 
 
+extern NSString * const DHSettingsChangedNotification;
+
+
 @interface DHRepo : UITableViewController <UIActionSheetDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (strong) NSMutableArray *feeds;
@@ -68,5 +71,3 @@
 @end
 
 NSInteger compareFeeds(id feed1, id feed2, void *context);
-
-#define DHSettingsChangedNotification @"DHSettingsChangedNotification"

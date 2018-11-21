@@ -17,6 +17,8 @@
 
 #import "DHAppleActiveLanguage.h"
 
+NSString *const DHNewAppleActiveLanguageKey = @"DHNewAppleActiveLanguageKey";
+
 @implementation DHAppleActiveLanguage
 
 + (DHAppleActiveLanguage *)sharedActiveLanguage
@@ -36,12 +38,12 @@
     self.activeLanguage = [[NSUserDefaults standardUserDefaults] integerForKey:DHNewAppleActiveLanguageKey];
 }
 
-+ (NSInteger)currentLanguage
++ (DHNewActiveAppleLanguage)currentLanguage
 {
     return [[DHAppleActiveLanguage sharedActiveLanguage] activeLanguage];
 }
 
-+ (void)setLanguage:(NSInteger)language
++ (void)setLanguage:(DHNewActiveAppleLanguage)language
 {
     [[NSUserDefaults standardUserDefaults] setInteger:language forKey:DHNewAppleActiveLanguageKey];
     [DHAppleActiveLanguage sharedActiveLanguage].activeLanguage = language;

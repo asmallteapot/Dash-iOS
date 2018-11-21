@@ -21,6 +21,7 @@
 #import "DHJavaScript.h"
 #import "DHRightDetailLabel.h"
 #import "DHRemoteServer.h"
+#import "DHURLSearch.h"
 #import "DHWebViewController.h"
 #import "NSString+DHUtils.h"
 #import "UITableView+DHUtils.h"
@@ -28,7 +29,7 @@
 #import "DHTocBrowser.h"
 
 
-#define DHHeaderSeparatorInset 14
+static CGFloat const DHHeaderSeparatorInset = 14.0;
 
 
 @implementation DHTocBrowser
@@ -161,12 +162,9 @@
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
 {
     self.searchController = controller;
-    if(isIOS11)
+    if(@available(iOS 11.0, *))
     {
-        if(@available(iOS 11.0, *))
-        {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     tableView.rowHeight = 44;
     tableView.separatorInset = UIEdgeInsetsMake(0, DHHeaderSeparatorInset, 0, 0);

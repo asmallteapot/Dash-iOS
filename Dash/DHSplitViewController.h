@@ -17,6 +17,9 @@
 
 @import UIKit;
 
-@interface DHSplitViewController : UISplitViewController
+extern NSString * const DHSplitViewControllerDidSeparate;
+extern NSString * const DHSplitViewControllerDidCollapse;
 
+
+@interface DHSplitViewController : UISplitViewController
 @end

@@ -21,6 +21,7 @@
 #import "DHCheatRepo.h"
 #import "DHDBResult.h"
 #import "DHDocset.h"
+#import "DHDocsetManager.h"
 #import "DHDocsetIndexer.h"
 #import "DHDocsetManager.h"
 #import "DHDocsetTransferrer.h"
@@ -34,8 +35,12 @@
 #import "NSArray+DHUtils.h"
 #import "NSString+DHUtils.h"
 #import "UIButton+DHUtils.h"
+#import "DHStorageController.h"
 
 #import "DHRepo.h"
+
+
+NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification";
 
 
 @implementation DHRepo
@@ -607,12 +612,9 @@
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
 {
-    if(isIOS11)
+    if(@available(iOS 11.0, *))
     {
-        if(@available(iOS 11.0, *))
-        {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     [controller.searchResultsTableView registerNib:[UINib nibWithNibName:@"DHRepoCell" bundle:nil] forCellReuseIdentifier:@"DHRepoCell"];
     [controller.searchResultsTableView registerNib:[UINib nibWithNibName:@"DHLoadingCell" bundle:nil] forCellReuseIdentifier:@"DHLoadingCell"];
@@ -851,7 +853,7 @@
 
 - (NSString *)docsetInstallFolderPath
 {
-    return [[homePath stringByAppendingPathComponent:@"Docsets"] stringByAppendingPathComponent:[self docsetInstallFolderName]];
+    return [[[[DHStorageController sharedController] libraryPath] stringByAppendingPathComponent:@"Docsets"] stringByAppendingPathComponent:[self docsetInstallFolderName]];
 }
 
 - (NSString *)docsetPathForFeed:(DHFeed *)feed

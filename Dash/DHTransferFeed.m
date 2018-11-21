@@ -16,7 +16,9 @@
 //
 
 #import "DHDocset.h"
+#import "DHDocsetManager.h"
 #import "DHDocsetTransferrer.h"
+#import "DHStorageController.h"
 
 #import "DHTransferFeed.h"
 
@@ -69,10 +71,10 @@
     self.installing = NO;
     self.feedResult = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if(![fileManager fileExistsAtPath:[transfersPath stringByAppendingPathComponent:self.feed]])
+    if(![fileManager fileExistsAtPath:[[[DHStorageController sharedController] documentsPath] stringByAppendingPathComponent:self.feed]])
     {
-        [fileManager moveItemAtPath:self.feedURL toPath:[transfersPath stringByAppendingPathComponent:self.feed] error:nil];
-        self.feedURL = [transfersPath stringByAppendingPathComponent:self.feed];
+        [fileManager moveItemAtPath:self.feedURL toPath:[[[DHStorageController sharedController] documentsPath] stringByAppendingPathComponent:self.feed] error:nil];
+        self.feedURL = [[[DHStorageController sharedController] documentsPath] stringByAppendingPathComponent:self.feed];
         self.docset = nil;
         [self loadDocset];
     }

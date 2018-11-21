@@ -42,6 +42,9 @@
 #import "DHRemoteServer.h"
 
 
+NSString * const DHRemotesChangedNotification = @"DHRemotesChangedNotification";
+
+
 @implementation DHRemoteServer
 
 + (DHRemoteServer *)sharedServer

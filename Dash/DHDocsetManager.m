@@ -20,6 +20,7 @@
 
 #import "DHDocsetManager.h"
 
+NSString * const DHDocsetsChangedNotification = @"DHDocsetsChangedNotification";
 
 @implementation DHDocsetManager
 

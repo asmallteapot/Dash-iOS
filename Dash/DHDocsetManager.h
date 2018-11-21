@@ -20,11 +20,15 @@
 @class DHDocset;
 
 
+extern NSString * const DHDocsetsChangedNotification;
+
+
 @interface DHDocsetManager : NSObject
 
 @property (strong) NSMutableArray *docsets;
 
 + (DHDocsetManager *)sharedManager;
+
 - (void)addDocset:(DHDocset *)docset andRemoveOthers:(BOOL)shouldRemove removeOnlyEqualPaths:(BOOL)removeOnlyEqualPaths;
 - (void)removeDocsetsInFolder:(NSString *)path;
 - (void)moveDocsetAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
@@ -35,5 +39,3 @@
 - (DHDocset *)appleAPIReferenceDocset;
 
 @end
-
-#define DHDocsetsChangedNotification @"DHDocsetsChangedNotification"

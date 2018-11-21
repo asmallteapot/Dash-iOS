@@ -38,7 +38,9 @@
 #import "DHRemote.h"
 #import "DHRemoteProtocol.h"
 #import "DHRemoteServer.h"
+#import "DHStorageController.h"
 #import "DHTarixProtocol.h"
+#import "DHURLSearch.h"
 #import "DHUserRepo.h"
 #import "DHWebViewController.h"
 #import "DHWindow.h"
@@ -63,15 +65,15 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setDoNotBackUp]; // this needs to be first because it deletes the preferences after a backup restore
-    NSLog(@"Home Path: %@", homePath);
+    NSLog(@"Home Path: %@", [[DHStorageController sharedController] libraryPath]);
     [self.window makeKeyAndVisible];
-    
-    NSString *cacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    if(cacheDir)
+
+    NSString *cachePath = [[DHStorageController sharedController] cachePath];
+    if(cachePath)
     {
-        [[NSFileManager defaultManager] removeItemAtPath:[cacheDir stringByAppendingPathComponent:@"com.apple.nsurlsessiond/Downloads"] error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:[cachePath stringByAppendingPathComponent:@"com.apple.nsurlsessiond/Downloads"] error:nil];
     }
-    
+
 #ifdef APP_STORE
 #ifndef DEBUG
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"40091a11e4b749fcb7808992057b165a"];
@@ -80,13 +82,13 @@
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 #endif
 #endif
-    
+
 #ifdef DEBUG
     [self checkCommitHashes];
 #endif
 //    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"Mozilla/5.0 (iPhone; CPU iPhone OS 10_10 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B411 Xcode/6.1.0", @"UserAgent", nil];
 //    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
-    
+
 //    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
 
     NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:4*1024*1024 diskCapacity:32*1024*1024 diskPath:@"dh_nsurlcache"];
@@ -138,7 +140,8 @@
     {
         NSError *error;
         NSString *fileName = [actualURL lastPathComponent];
-        NSURL *copyToURL = [[NSURL fileURLWithPath:transfersPath] URLByAppendingPathComponent:fileName isDirectory:NO];
+        NSString *documentsPath = [[DHStorageController sharedController] documentsPath];
+        NSURL *copyToURL = [[NSURL fileURLWithPath:documentsPath] URLByAppendingPathComponent:fileName isDirectory:NO];
         [[NSFileManager defaultManager] removeItemAtPath:copyToURL.path error:nil];
         [[NSFileManager defaultManager] moveItemAtURL:actualURL toURL:copyToURL error:&error];
         NSString *title;
@@ -238,7 +241,7 @@
 
 - (void)setDoNotBackUp
 {
-    NSString *path = [homePath stringByAppendingPathComponent:@"Docsets"];
+    NSString *path = [[[DHStorageController sharedController] libraryPath] stringByAppendingPathComponent:@"Docsets"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if(![fileManager fileExistsAtPath:path])
     {

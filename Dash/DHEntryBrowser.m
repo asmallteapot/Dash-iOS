@@ -23,8 +23,10 @@
 #import "DHDocset.h"
 #import "DHDocsetManager.h"
 #import "DHTypes.h"
+#import "DHURLSearch.h"
 #import "DHWebViewController.h"
 #import "UITableView+DHUtils.h"
+#import "DHStorageController.h"
 
 #import "DHEntryBrowser.h"
 
@@ -244,7 +246,7 @@
             DHDBResult *result = (DHDBResult *)self.entries[i];
             NSArray *components = [result.fullPath componentsSeparatedByString:@"/Library/Docsets"];
             if (components.count == 2) {
-                result.fullPath = [@"file://" stringByAppendingFormat:@"%@%@%@",homePath,@"/Docsets",components[1]];
+                result.fullPath = [@"file://" stringByAppendingFormat:@"%@%@%@",[[DHStorageController sharedController] libraryPath],@"/Docsets",components[1]];
             }
         }
     }

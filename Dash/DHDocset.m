@@ -18,10 +18,12 @@
 @import SQLite3;
 
 #import "DHAppleActiveLanguage.h"
+#import "DHDocsetManager.h"
 #import "NSFileManager+DHUtils.h"
 #import "DHImageCache.h"
 #import "FMDatabase+DHDBAdditions.h"
 #import "NSString+DHUtils.h"
+#import "DHStorageController.h"
 
 #import "DHDocset.h"
 
@@ -94,7 +96,7 @@ static NSConditionLock *_stepLock = nil;
 + (DHDocset *)docsetAtPath:(NSString *)path
 {
     DHDocset *docset = [[DHDocset alloc] init];
-    docset.relativePath = [path substringFromString:[homePath stringByDeletingLastPathComponent]];
+    docset.relativePath = [path substringFromString:[[[DHStorageController sharedController] libraryPath] stringByDeletingLastPathComponent]];
     NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:[path stringByAppendingPathComponent:@"Contents/Info.plist"]];
     if(!plist)
     {
@@ -376,7 +378,7 @@ static NSConditionLock *_stepLock = nil;
 {
     if(!self._path)
     {
-        self._path = [[homePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:self.relativePath];
+        self._path = [[[[DHStorageController sharedController] libraryPath] stringByDeletingLastPathComponent] stringByAppendingPathComponent:self.relativePath];
     }
     return self._path;
 }

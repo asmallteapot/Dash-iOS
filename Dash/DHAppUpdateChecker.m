@@ -21,8 +21,8 @@
 #import "DHAppUpdateChecker.h"
 
 
-#define DHAppUpdateCheckerLastCheckDate @"DHAppUpdateCheckerLastCheckDate"
-#define DHAppUpdateCheckerScheduledUpdateVersion @"DHAppUpdateCheckerScheduledUpdateVersion"
+NSString * const DHAppUpdateCheckerLastCheckDate = @"DHAppUpdateCheckerLastCheckDate";
+NSString * const  DHAppUpdateCheckerScheduledUpdateVersion = @"DHAppUpdateCheckerScheduledUpdateVersion";
 
 @implementation DHAppUpdateChecker
 

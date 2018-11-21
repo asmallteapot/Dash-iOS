@@ -6,21 +6,5 @@
 
 #ifdef __OBJC__
 #define iPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-#define isRetina (UIScreen.mainScreen.scale > 1.0)
-#define isIOS11 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)
 #define isRegularHorizontalClass ([DHAppDelegate sharedDelegate].window.rootViewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
-#define homePath NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0]
-#define transfersPath NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]
-#define TICK   NSDate *startTime = [NSDate date]
-#define TOCK   NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])
-#define DHPrepareForURLSearch @"DHPrepareForURLSearch"
-#define DHSplitViewControllerDidSeparate @"DHSplitViewControllerDidSeparate"
-#define DHSplitViewControllerDidCollapse @"DHSplitViewControllerDidCollapse"
-#define DHPerformURLSearch @"DHPerformURLSearch"
-#define DHWindowChangedTraitCollection @"DHWindowChangedTraitCollection"
 #endif

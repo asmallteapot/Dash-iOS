@@ -23,6 +23,11 @@
 #include <arpa/inet.h>
 #include <net/if.h>
 
+
+static NSString * const IP_ADDR_IPv4 = @"ipv4";
+static NSString * const IP_ADDR_IPv6 = @"ipv6";
+
+
 @implementation NSArray (DHUtils)
 
 - (NSArray *)characterIndexTitles
@@ -65,9 +70,6 @@
 
 + (NSMutableArray *)currentIPAddresses
 {
-#define IP_ADDR_IPv4    @"ipv4"
-#define IP_ADDR_IPv6    @"ipv6"
-
     NSMutableArray *addresses = [NSMutableArray array];
     
     // retrieve the current interfaces - returns 0 on success

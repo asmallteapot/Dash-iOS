@@ -20,6 +20,7 @@
 #import "DHAppDelegate.h"
 #import "DHDocsetDownloader.h"
 #import "DHDocsetTransferrer.h"
+#import "DHURLSearch.h"
 #import "DHWebViewController.h"
 #import "UITableView+DHUtils.h"
 

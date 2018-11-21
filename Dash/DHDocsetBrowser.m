@@ -32,6 +32,7 @@
 #import "DHTocBrowser.h"
 #import "DHTypeBrowser.h"
 #import "DHRepo.h"
+#import "DHURLSearch.h"
 #import "DHWebView.h"
 #import "DHWebViewController.h"
 #import "NSString+DHUtils.h"

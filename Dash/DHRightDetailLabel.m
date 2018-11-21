@@ -35,7 +35,7 @@
         {
             rect.origin.y += 11;
             rect.size.width -= 2;
-            if(isRetina)
+            if(self.window.screen.scale > 1.0)
             {
                 rect.origin.y -= 0.5;                
             }

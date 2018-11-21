@@ -17,6 +17,10 @@
 
 #import "DHWindow.h"
 
+
+NSString * const DHWindowChangedTraitCollection = @"DHWindowChangedTraitCollection";
+
+
 @implementation DHWindow
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection

@@ -22,6 +22,9 @@
 #import "NSURL+DHUtils.h"
 
 
+NSInteger const DHDownloadCancelled = 2481939;
+
+
 @implementation DHFileDownload
 
 + (BOOL)downloadItemAtURL:(NSURL *)url toFile:(NSString *)localPath error:(NSError **)error delegate:(id)delegate identifier:(id)identifier
@@ -134,7 +137,7 @@
 - (void)cancelDownload
 {
     self.cancelled = YES;
-    self.error = [NSError errorWithDomain:@"com.kapeli.dash" code:DHDownloadCancelled userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"%d", DHDownloadCancelled]}];
+    self.error = [NSError errorWithDomain:@"com.kapeli.dash" code:DHDownloadCancelled userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"%ld", (long)DHDownloadCancelled]}];
     [self.identifier setExpectedContentLength:0];
     [self.identifier setReceivedContentLength:0];
     self.isDone = YES;

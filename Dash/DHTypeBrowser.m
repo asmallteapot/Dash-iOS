@@ -23,7 +23,9 @@
 #import "DHDocsetBrowser.h"
 #import "DHDocsetManager.h"
 #import "DHRightDetailLabel.h"
+#import "DHSplitViewController.h"
 #import "DHTypes.h"
+#import "DHURLSearch.h"
 #import "DHWebViewController.h"
 #import "NSString+DHUtils.h"
 #import "UITableView+DHUtils.h"
@@ -316,7 +318,7 @@
             NSMutableAttributedString *title = [[DHDocsetBrowser titleBarItemAttributedStringTemplate] mutableCopy];
             [title.mutableString setString:[NSString stringWithFormat:@"%@  ", self.docset.name]];
             [title addAttributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor], NSFontAttributeName: [UIFont fontWithName:@"Ionicons" size:20]} range:NSMakeRange(title.mutableString.length-1, 1)];
-            if(isIOS11)
+            if(@available(iOS 11.0, *))
             {
                 [title addAttributes:@{NSBaselineOffsetAttributeName: @(2)} range:NSMakeRange(0, title.mutableString.length-2)];
             }

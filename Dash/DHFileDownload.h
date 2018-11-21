@@ -17,6 +17,8 @@
 
 @import Foundation;
 
+extern NSInteger const DHDownloadCancelled;
+
 @interface DHFileDownload : NSObject <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDownloadDelegate>
 
 @property (nonatomic) NSURLSession *session;
@@ -32,5 +34,3 @@
 - (void)cancelDownload;
 
 @end
-
-#define DHDownloadCancelled 2481939

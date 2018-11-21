@@ -25,6 +25,7 @@
 #import "DHNestedViewController.h"
 #import "DHRightDetailLabel.h"
 #import "DHWebViewController.h"
+#import "DHWindow.h"
 #import "NSString+DHUtils.h"
 
 #import "DHDBSearchController.h"
@@ -99,12 +100,9 @@
 {
     self.loading = YES;
     tableView.allowsSelection = NO;
-    if(isIOS11)
+    if(@available(iOS 11.0, *))
     {
-        if(@available(iOS 11.0, *))
-        {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     [tableView registerNib:[UINib nibWithNibName:@"DHBrowserCell" bundle:nil] forCellReuseIdentifier:@"DHBrowserCell"];
     [tableView registerNib:[UINib nibWithNibName:@"DHLoadingCell" bundle:nil] forCellReuseIdentifier:@"DHLoadingCell"];

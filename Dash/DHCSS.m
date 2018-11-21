@@ -17,6 +17,8 @@
 
 #import "DHCSS.h"
 
+NSString * const DHActiveAppleLanguageKey = @"ActiveAppleLanguage";
+
 @implementation DHCSS
 
 static int _activeAppleLanguage;
@@ -85,7 +87,7 @@ static long _textSizeAdjust;
     return [NSString stringWithFormat:@"%@%@", [DHCSS currentCSSString], ([[DHCSS sharedCSS] shouldModifyTextSize]) ? [NSString stringWithFormat:@"\n\nbody {-webkit-text-size-adjust: %@}", [[DHCSS sharedCSS] textSizeAdjust]] : @""];
 }
 
-+ (int)activeAppleLanguage
++ (DHActiveAppleLanguage)activeAppleLanguage
 {
     return _activeAppleLanguage;
 }

@@ -17,15 +17,20 @@
 
 @import Foundation;
 
+
+extern NSString * const DHNewAppleActiveLanguageKey;
+
+typedef NS_ENUM(NSInteger, DHNewActiveAppleLanguage) {
+    DHNewActiveAppleLanguageSwift = 0,
+    DHNewActiveAppleLanguageObjC = 1
+};
+
+
 @interface DHAppleActiveLanguage : NSObject
 
-@property (assign) NSInteger activeLanguage;
+@property (assign) DHNewActiveAppleLanguage activeLanguage;
 
-+ (NSInteger)currentLanguage;
-+ (void)setLanguage:(NSInteger)language;
++ (DHNewActiveAppleLanguage)currentLanguage;
++ (void)setLanguage:(DHNewActiveAppleLanguage)language;
 
 @end
-
-#define DHNewAppleActiveLanguageKey @"DHNewAppleActiveLanguageKey"
-#define DHNewActiveAppleLanguageSwift 0
-#define DHNewActiveAppleLanguageObjC 1

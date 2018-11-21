@@ -26,6 +26,7 @@
 #import "DHRightDetailLabel.h"
 #import "DHWebView.h"
 #import "DHWebViewController.h"
+#import "DHURLSearch.h"
 #import "UITableView+DHUtils.h"
 
 #import "DHRemoteBrowser.h"

@@ -238,6 +238,10 @@
 		43FD2F0219BB8D87007E594D /* DHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD2F0119BB8D87007E594D /* DHWebViewController.m */; };
 		43FD2F0419BB8D87007E594D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43FD2F0319BB8D87007E594D /* Images.xcassets */; };
 		45D28F8ABD1FC392B1930467 /* libPods-Dash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2364AD2032B0714BCD2265 /* libPods-Dash.a */; };
+		9B02E1C921C0A9FE00FCA4E5 /* DHStorageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B02E1C821C0A9FE00FCA4E5 /* DHStorageController.m */; };
+		9B02E1CA21C0A9FE00FCA4E5 /* DHStorageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B02E1C821C0A9FE00FCA4E5 /* DHStorageController.m */; };
+		9B14768421A4EB75008C4475 /* DHURLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768321A4EB75008C4475 /* DHURLSearch.m */; };
+		9B14768521A4EB75008C4475 /* DHURLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768321A4EB75008C4475 /* DHURLSearch.m */; };
 		9B14768821A5E84C008C4475 /* FMDatabase+DHDBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */; };
 		9B14768921A5E855008C4475 /* FMDatabase+DHDBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */; };
 		F5C39C00200A836D00734571 /* DHDocsetBrowserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C39BFF200A836D00734571 /* DHDocsetBrowserViewModel.m */; };
@@ -464,6 +468,10 @@
 		6BB3997912C96D08897BF444 /* Pods-Dash-Dash App Store.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash-Dash App Store.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Dash-Dash App Store/Pods-Dash-Dash App Store.release.xcconfig"; sourceTree = "<group>"; };
 		7E45E2662CBB7671D0D844A3 /* Pods-Dash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Dash/Pods-Dash.release.xcconfig"; sourceTree = "<group>"; };
 		9A2364AD2032B0714BCD2265 /* libPods-Dash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dash.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B02E1C721C0A9FE00FCA4E5 /* DHStorageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHStorageController.h; sourceTree = "<group>"; };
+		9B02E1C821C0A9FE00FCA4E5 /* DHStorageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHStorageController.m; sourceTree = "<group>"; };
+		9B14768221A4EB75008C4475 /* DHURLSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHURLSearch.h; sourceTree = "<group>"; };
+		9B14768321A4EB75008C4475 /* DHURLSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHURLSearch.m; sourceTree = "<group>"; };
 		9B14768621A5E84B008C4475 /* FMDatabase+DHDBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+DHDBAdditions.h"; sourceTree = "<group>"; };
 		9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+DHDBAdditions.m"; sourceTree = "<group>"; };
 		9FB91D369AD27465BED375AD /* libPods-Dash-Dash App Store.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dash-Dash App Store.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -846,6 +854,8 @@
 				43D7E4EF1BB4C62E00FC1DEF /* DHWindow.m */,
 				43BD6BF21DCE379B0005A1E7 /* DHAppUpdateChecker.h */,
 				43BD6BF31DCE379B0005A1E7 /* DHAppUpdateChecker.m */,
+				9B14768221A4EB75008C4475 /* DHURLSearch.h */,
+				9B14768321A4EB75008C4475 /* DHURLSearch.m */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -961,6 +971,8 @@
 				438B06DE19FFA2DF009A539D /* Launch.xib */,
 				43FD2EF419BB8D87007E594D /* DHAppDelegate.h */,
 				43FD2EF519BB8D87007E594D /* DHAppDelegate.m */,
+				9B02E1C721C0A9FE00FCA4E5 /* DHStorageController.h */,
+				9B02E1C821C0A9FE00FCA4E5 /* DHStorageController.m */,
 				4303A3AF19C657FE00A7CD85 /* Database */,
 				438525E919C1509A002BAFD1 /* Searcher */,
 				437AD41819E26F0A00BA0FE4 /* WebView */,
@@ -1334,6 +1346,7 @@
 				43AB654F1ED19D2F00A6EC18 /* DHDocset.m in Sources */,
 				43AB65501ED19D2F00A6EC18 /* UITableView+DHUtils.m in Sources */,
 				43AB65511ED19D2F00A6EC18 /* NSArray+DHUtils.m in Sources */,
+				9B02E1CA21C0A9FE00FCA4E5 /* DHStorageController.m in Sources */,
 				43AB65521ED19D2F00A6EC18 /* DHDBNestedResultSorter.m in Sources */,
 				43AB65531ED19D2F00A6EC18 /* DHCSS.m in Sources */,
 				43AB65541ED19D2F00A6EC18 /* DHDBResultSorter.m in Sources */,
@@ -1364,6 +1377,7 @@
 				43AB65701ED19D2F00A6EC18 /* DHQueuedDB.m in Sources */,
 				9B14768921A5E855008C4475 /* FMDatabase+DHDBAdditions.m in Sources */,
 				43AB65721ED19D2F00A6EC18 /* DHUserRepoList.m in Sources */,
+				9B14768521A4EB75008C4475 /* DHURLSearch.m in Sources */,
 				43AB65731ED19D2F00A6EC18 /* DHUserRepo.m in Sources */,
 				43AB65741ED19D2F00A6EC18 /* DHNavigationAnimator.m in Sources */,
 				43AB65751ED19D2F00A6EC18 /* DHEntryBrowser.m in Sources */,
@@ -1416,6 +1430,7 @@
 				4303A3C719C6590000A7CD85 /* DHDocset.m in Sources */,
 				43256F0A19F7B4B9003919BA /* UITableView+DHUtils.m in Sources */,
 				438525E519C13E42002BAFD1 /* NSArray+DHUtils.m in Sources */,
+				9B02E1C921C0A9FE00FCA4E5 /* DHStorageController.m in Sources */,
 				43D4F06A19E7DF3900C22AF5 /* DHDBNestedResultSorter.m in Sources */,
 				437B6F8719EBC98A003023E8 /* DHCSS.m in Sources */,
 				4390520019E692D90083A55E /* DHDBResultSorter.m in Sources */,
@@ -1446,6 +1461,7 @@
 				43D4F06419E7CEC500C22AF5 /* DHQueuedDB.m in Sources */,
 				9B14768821A5E84C008C4475 /* FMDatabase+DHDBAdditions.m in Sources */,
 				43FC34041DE784C40089F134 /* DHUserRepoList.m in Sources */,
+				9B14768421A4EB75008C4475 /* DHURLSearch.m in Sources */,
 				43280F541DDE4A7B001C2062 /* DHUserRepo.m in Sources */,
 				43B0956919BFD19900F8611B /* DHNavigationAnimator.m in Sources */,
 				439051F919E684160083A55E /* DHEntryBrowser.m in Sources */,

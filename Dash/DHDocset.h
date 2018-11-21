@@ -19,6 +19,12 @@
 @import FMDB;
 
 
+typedef NS_ENUM(NSInteger, DHLock) {
+    DHLockDontLock = -1,
+    DHLockSearchOnly = 2,
+    DHLockAllAllowed = 3,
+};
+
 @interface DHDocset : NSObject
 
 // If you add anything that gets changed by the user (e.g. custom keyword),
@@ -65,9 +71,5 @@
 - (NSString *)sqlPath;
 - (NSString *)optimisedIndexPath;
 - (NSString *)indexFilePath;
-
-#define DHLockAllAllowed 3
-#define DHLockSearchOnly 2
-#define DHLockDontLock -1
 
 @end

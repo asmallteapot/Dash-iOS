@@ -18,6 +18,7 @@
 #import "DHAppDelegate.h"
 #import "DHDocset.h"
 #import "DHDocsetIndexer.h"
+#import "DHDocsetManager.h"
 #import "DHFeedResult.h"
 #import "DHRepoTableViewCell.h"
 #import "DHRightDetailLabel.h"
@@ -25,6 +26,7 @@
 #import "NSString+DHUtils.h"
 #import "NSTimer+DHUtils.h"
 #import "NSURL+DHUtils.h"
+#import "DHStorageController.h"
 
 #import "DHDocsetTransferrer.h"
 
@@ -42,7 +44,7 @@ static id singleton = nil;
 {
     feed.feedResult = [[DHFeedResult alloc] init];
     feed.feedResult.feed = feed;
-    NSString *sourcePath = [transfersPath stringByAppendingPathComponent:feed.feed];
+    NSString *sourcePath = [[[DHStorageController sharedController] documentsPath] stringByAppendingPathComponent:feed.feed];
     @synchronized([DHDocsetTransferrer class])
     {
         feed.feedURL = [self docsetPathForFeed:feed];
@@ -131,7 +133,7 @@ static id singleton = nil;
 - (IBAction)refreshFeeds:(id)sender
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *waitingPath = transfersPath;
+    NSString *waitingPath = [[DHStorageController sharedController] documentsPath];
     NSArray *waiting = [fileManager contentsOfDirectoryAtPath:waitingPath error:nil];
     self.loadedFeedsHash = [waiting componentsJoinedByString:@"xx"];
     NSMutableArray *newFeeds = [NSMutableArray array];
@@ -290,7 +292,7 @@ static id singleton = nil;
 {
     ++self.pollCounter;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if(!self.loadedFeedsHash || ![[[fileManager contentsOfDirectoryAtPath:transfersPath error:nil] componentsJoinedByString:@"xx"] isEqualToString:self.loadedFeedsHash])
+    if(!self.loadedFeedsHash || ![[[fileManager contentsOfDirectoryAtPath:[[DHStorageController sharedController] documentsPath] error:nil] componentsJoinedByString:@"xx"] isEqualToString:self.loadedFeedsHash])
     {
         [self refreshFeeds:nil];
     }
