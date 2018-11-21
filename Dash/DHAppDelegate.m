@@ -124,47 +124,79 @@
     return YES;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)actualURL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-    if([[actualURL absoluteString] hasCaseInsensitivePrefix:@"dash://"] || [[actualURL absoluteString] hasCaseInsensitivePrefix:@"dash-plugin://"])
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:DHPrepareForURLSearch object:nil];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:DHPerformURLSearch object:[actualURL absoluteString]];
-        });
+    NSArray<NSString *> *dashUrlSchemes = @[
+		@"dash",
+        @"dash-plugin",
+    ];
+
+    if ([dashUrlSchemes containsObject:[url.scheme lowercaseString]]) {
+        return [self openDashURL:url];
     }
-    else if([[actualURL pathExtension] isCaseInsensitiveEqual:@"docset"])
-    {
-        NSError *error;
-        NSString *fileName = [actualURL lastPathComponent];
-        NSURL *copyToURL = [[NSURL fileURLWithPath:[DHDocsetManager documentsPath] URLByAppendingPathComponent:fileName isDirectory:NO];
-        [[NSFileManager defaultManager] removeItemAtPath:copyToURL.path error:nil];
-        [[NSFileManager defaultManager] moveItemAtURL:actualURL toURL:copyToURL error:&error];
-        NSString *title;
-        NSString *message;
-        if(error)
-        {
-            title = @"Import Failed";
-            message = @"Could not import the docset. Please try again!";
-            NSLog(@"%@", error.localizedDescription);
-        }
-        else
-        {
-            title = @"Import Successful";
-            message = @"You can find the docset in Settings, under the Transfer Docsets section.";
-            NSLog(@"Docset successfully imported");
-        }
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil]];
-        [[self topViewController] presentViewController:alert animated:YES completion:nil];
+
+    // TODO: delete this?
+    if (![url.pathExtension isCaseInsensitiveEqual:@"docset"]) {
+        NSLog(@"%s - Unsupported path extension at url '%@'", __PRETTY_FUNCTION__, url);
+        return NO;
     }
+
+    BOOL openInPlace = options[UIApplicationOpenURLOptionsOpenInPlaceKey];
+    if (openInPlace) {
+        return [self openDocumentFromURL:url];
+    } else {
+        return [self importDocumentFromURL:url];
+    }
+}
+
+- (BOOL)openDashURL:(NSURL *)dashURL
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:DHPrepareForURLSearch object:nil];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:DHPerformURLSearch object:dashURL.absoluteString];
+    });
+
     return YES;
 }
 
-#pragma clang diagnostic pop
+- (BOOL)openDocumentFromURL:(NSURL *)url
+{
+    NSLog(@"%s - Opening in place is not yet supported", __PRETTY_FUNCTION__);
+    return NO;
+}
+
+- (BOOL)importDocumentFromURL:(NSURL *)sourceURL
+{
+    NSString *fileName = [sourceURL lastPathComponent];
+    NSURL *destinationURL = [[NSURL fileURLWithPath:[DHDocsetManager documentsPath] URLByAppendingPathComponent:fileName isDirectory:NO];
+
+    [[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
+
+    NSError *error;
+    [[NSFileManager defaultManager] moveItemAtURL:sourceURL toURL:destinationURL error:&error];
+
+    NSString *title;
+    NSString *message;
+    if(error)
+    {
+        title = @"Import Failed";
+        message = @"Could not import the docset. Please try again!";
+        NSLog(@"%@", error.localizedDescription);
+    }
+    else
+    {
+        title = @"Import Successful";
+        message = @"You can find the docset in Settings, under the Transfer Docsets section.";
+        NSLog(@"Docset successfully imported");
+    }
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle: UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil]];
+    [[self topViewController] presentViewController:alert animated:YES completion:nil];
+
+    return YES;
+}
 
 - (UINavigationController *)navigationController
 {
