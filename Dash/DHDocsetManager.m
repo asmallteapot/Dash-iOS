@@ -22,187 +22,267 @@
 
 NSString * const DHDocsetsChangedNotification = @"DHDocsetsChangedNotification";
 
+NSString * const DHDocsetsUserDefaultsKey = @"docsets";
+
+
+@interface DHDocsetManager ()
+/// Controller for accessing files on disk
+@property (strong, nonatomic, nonnull) NSFileManager *fileManager;
+
+/// Controller for posting notifications
+@property (strong, nonatomic, nonnull) NSNotificationCenter *notificationCenter;
+
+/// Controller for accessing user defaults
+@property (strong, nonatomic, nonnull) NSUserDefaults *userDefaults;
+
+/// Predicate for listing enabled docsets
+@property (strong, nonatomic, nonnull) NSPredicate *predicateMatchingAppleAPIReferenceDocsets;
+
+/// Predicate for matching docsets at a relative path
+@property (strong, nonatomic, nonnull) NSPredicate *predicateMatchingDocsetsAtRelativePath;
+
+/// Predicate for listing enabled docsets
+@property (strong, nonatomic, nonnull) NSPredicate *predicateMatchingEnabledDocsets;
+
+// redeclare internal-readwrite properties
+@property (copy, nonatomic, readwrite) NSArray<DHDocset *> *docsets;
+@end
+
 @implementation DHDocsetManager
 
-+ (NSString *)cachePath;
+#pragma mark - File paths
+
++ (nullable NSString *)cachePath;
 {
     return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
 }
 
-+ (NSString *)documentsPath;
++ (nullable NSString *)documentsPath;
 {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
-+ (NSString *)libraryPath;
++ (nullable NSString *)libraryPath;
 {
     return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
 }
 
-+ (DHDocsetManager *)sharedManager
+#pragma mark - Singleton
+
++ (nonnull instancetype)sharedManager;
 {
     static dispatch_once_t pred;
     static DHDocsetManager *_docsetManager = nil;
-    
     dispatch_once(&pred, ^{
         _docsetManager = [[DHDocsetManager alloc] init];
-        [_docsetManager setUp];
     });
     return _docsetManager;
 }
 
-- (void)setUp
-{
-    NSMutableArray *docsets = [NSMutableArray array];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    for(NSDictionary *dictionary in [[NSUserDefaults standardUserDefaults] objectForKey:@"docsets"])
-    {
-        DHDocset *docset = [DHDocset docsetWithDictionaryRepresentation:dictionary];
-        if([fileManager fileExistsAtPath:docset.path])
-        {
-            [docsets addObject:docset];            
-        }
-    }
-    self.docsets = docsets;
-}
+#pragma mark - Initialization
 
-- (void)saveDefaults
+- (instancetype)init;
 {
-    NSMutableArray *dictionaries = [NSMutableArray array];
-    for(DHDocset *docset in self.docsets)
-    {
-        [dictionaries addObject:[docset dictionaryRepresentation]];
-    }
-    [[NSUserDefaults standardUserDefaults] setObject:dictionaries forKey:@"docsets"];
-}
+    self = [super init];
+    if (self) {
+        self.docsets = @[];
+        self.fileManager = [NSFileManager defaultManager];
+        self.notificationCenter = [NSNotificationCenter defaultCenter];
+        self.predicateMatchingAppleAPIReferenceDocsets = [NSPredicate predicateWithBlock:^BOOL(DHDocset * _Nullable docset, NSDictionary<NSString *,id> * _Nullable bindings) {
+            if (![[docset.relativePath lastPathComponent] isEqualToString:@"Apple_API_Reference.docset"]) {
+                return NO;
+            }
 
-- (void)addDocset:(DHDocset *)docset andRemoveOthers:(BOOL)shouldRemove removeOnlyEqualPaths:(BOOL)removeOnlyEqualPaths
-{
-    NSString *folder = [docset.path stringByDeletingLastPathComponent];
-    if(!docset)
-    {
-        return;
-    }
-    NSInteger index = [self.docsets indexOfObject:docset];
-    DHDocset *replaced = nil;
-    if(index != NSNotFound)
-    {
-        replaced = self.docsets[index];
-        [self.docsets removeObjectAtIndex:index];
-    }
-    if(shouldRemove)
-    {
-        NSIndexSet *toRemove = [self.docsets indexesOfObjectsPassingTest:^BOOL(DHDocset *obj, NSUInteger idx, BOOL *stop) {
-            if(!removeOnlyEqualPaths)
-            {
-                if([[obj.path stringByDeletingLastPathComponent] isCaseInsensitiveEqual:folder])
-                {
-                    return YES;
-                }
+            NSString *helperDirectoryPath = [docset.documentsPath stringByAppendingPathComponent:@"Apple Docs Helper"];
+            if (![self.fileManager fileExistsAtPath:helperDirectoryPath]) {
+                return NO;
             }
-            else if([obj.path isCaseInsensitiveEqual:docset.path])
-            {
-                return YES;
+
+            if (![docset.plist[@"DashDocSetIsGeneratedForiOSCompatibility"] boolValue]) {
+                return NO;
             }
-            return NO;
+
+            return YES;
         }];
-        if(index == NSNotFound && toRemove.count)
-        {
-            index = toRemove.firstIndex;
-            replaced = self.docsets[index];
-        }
-        [self.docsets removeObjectsAtIndexes:toRemove];
+        self.predicateMatchingDocsetsAtRelativePath = [NSPredicate predicateWithFormat:@"relativePath = '%@'"];
+        self.predicateMatchingEnabledDocsets = [NSPredicate predicateWithFormat:@"isEnabled = YES"];
+        self.userDefaults = [NSUserDefaults standardUserDefaults];
+
+        [self loadDefaults];
     }
-    if(replaced)
-    {
-        [docset grabUserDataFromDocset:replaced];
-        [self.docsets insertObject:docset atIndex:index];
-    }
-    else
-    {
-        [self.docsets addObject:docset];
-    }
-    [self saveDefaults];
-    [[NSNotificationCenter defaultCenter] postNotificationName:DHDocsetsChangedNotification object:self];
+    return self;
 }
 
-- (void)removeDocsetsInFolder:(NSString *)path
+#pragma mark - Internal state
+
+/// Saves the changed docset list and posts a notification.
+- (void)handleDocsetListChanged;
 {
-    [self.docsets removeObjectsAtIndexes:[self.docsets indexesOfObjectsPassingTest:^BOOL(DHDocset *obj, NSUInteger idx, BOOL *stop) {
-        if([[obj.path stringByDeletingLastPathComponent] isCaseInsensitiveEqual:path] || [obj.path isCaseInsensitiveEqual:path])
-        {
+    [self saveDefaults];
+    [self postDocsetsChangedNotification];
+}
+
+/// Post a notification that the docset list has changed.
+- (void)postDocsetsChangedNotification;
+{
+    [self.notificationCenter postNotificationName:DHDocsetsChangedNotification object:self];
+}
+
+#pragma mark - Predicates
+
+- (NSPredicate *)predicateMatchingDocsetsAtPath:(NSString *)path;
+{
+    return [NSPredicate predicateWithBlock:^BOOL(DHDocset * _Nullable docset, NSDictionary<NSString *,id> * _Nullable bindings) {
+        if ([docset.path isCaseInsensitiveEqual:path]) {
             return YES;
         }
+
+        if ([[docset.path stringByDeletingLastPathComponent] isCaseInsensitiveEqual:path]) {
+            return YES;
+        }
+
         return NO;
-    }]];
-    [self saveDefaults];
-    [[NSNotificationCenter defaultCenter] postNotificationName:DHDocsetsChangedNotification object:self];
+    }];
+}
+
+- (NSPredicate *)predicateExcludingDocsetsAtPath:(NSString *)path;
+{
+    return [NSCompoundPredicate notPredicateWithSubpredicate:[self predicateMatchingDocsetsAtPath:path]];
+}
+
+#pragma mark - User defaults
+
+/// Loads the docset list from the user defaults
+- (void)loadDefaults;
+{
+    NSMutableArray *loadedDocsets = [[NSMutableArray alloc] init];
+    NSArray *docsetList = [self.userDefaults arrayForKey:DHDocsetsUserDefaultsKey];
+    for (NSDictionary *dictionary in docsetList) {
+        DHDocset *docset = [DHDocset docsetWithDictionaryRepresentation:dictionary];
+        if ([self.fileManager fileExistsAtPath:docset.path]) {
+            [loadedDocsets addObject:docset];
+        } else {
+            NSLog(@"%s - Docset not found at '%@'", __PRETTY_FUNCTION__, docset.path);
+        }
+    }
+
+    self.docsets = [loadedDocsets mutableCopy];
+    NSLog(@"%s - Loaded %lu docset(s).", __PRETTY_FUNCTION__, self.docsets.count);
+}
+
+/// Saves the docset list to the user defaults.
+- (void)saveDefaults;
+{
+    NSMutableArray<NSDictionary *> *dictionaries = [NSMutableArray array];
+    for (DHDocset *docset in self.docsets) {
+        [dictionaries addObject:[docset dictionaryRepresentation]];
+    }
+
+    [self.userDefaults setObject:dictionaries forKey:DHDocsetsUserDefaultsKey];
+    NSLog(@"%s - Saved %lu docset(s).", __PRETTY_FUNCTION__, dictionaries.count);
+}
+
+#pragma mark - Reading the list of docsets
+
+- (nonnull NSArray<DHDocset *> *)enabledDocsets;
+{
+    return [self.docsets filteredArrayUsingPredicate:self.predicateMatchingEnabledDocsets];
+}
+
+#pragma mark - Finding docsets in the list
+
+- (nullable DHDocset *)appleAPIReferenceDocset;
+{
+    NSMutableOrderedSet *orderedDocsets = [NSMutableOrderedSet orderedSet];
+    [orderedDocsets addObjectsFromArray:self.enabledDocsets];
+    [orderedDocsets addObjectsFromArray:self.docsets];
+    [orderedDocsets filterUsingPredicate:self.predicateMatchingAppleAPIReferenceDocsets];
+    return [orderedDocsets firstObject];
+}
+
+- (nullable DHDocset *)docsetForDocumentationPage:(nonnull NSString *)url;
+{
+    if ([url hasPrefix:@"dash-apple-api://"]) {
+        return [self appleAPIReferenceDocset];
+    }
+
+    url = [[url stringByDeletingPathFragment] stringByReplacingPercentEscapes];
+    for (DHDocset *docset in self.docsets) {
+        NSString *path = docset.path;
+        if (path && [url rangeOfString:path].location != NSNotFound) {
+            return docset;
+        }
+    }
+
+    return nil;
+}
+
+- (nullable DHDocset *)docsetWithRelativePath:(nonnull NSString *)relativePath
+{
+    NSPredicate *predicate = [self.predicateMatchingDocsetsAtRelativePath predicateWithSubstitutionVariables:@{
+        @"relativePath": @"relativePath"
+    }];
+    return [[self.docsets filteredArrayUsingPredicate:predicate] firstObject];
+}
+
+#pragma mark - Modifying the list of docsets
+
+- (void)addDocset:(nonnull DHDocset *)newDocset replaceExisting:(BOOL)replaceExisting;
+{
+    NSParameterAssert(newDocset);
+
+    DHDocset *existingDocset = [self docsetWithRelativePath:newDocset.path];
+    NSMutableArray *mutableDocsets = [self.docsets mutableCopy];
+
+    if (replaceExisting && existingDocset) {
+        [newDocset grabUserDataFromDocset:existingDocset];
+
+        NSUInteger existingDocsetCount = mutableDocsets.count;
+        NSUInteger existingDocsetIndex = [mutableDocsets indexOfObject:existingDocset];
+        [mutableDocsets filterUsingPredicate:[self predicateExcludingDocsetsAtPath:newDocset.path]];
+        NSUInteger removedDocsetCount = existingDocsetCount - mutableDocsets.count;
+        existingDocsetIndex -= removedDocsetCount;
+
+        NSUInteger newDocsetIndex = MIN(existingDocsetIndex, mutableDocsets.count);
+        [mutableDocsets insertObject:newDocset atIndex:newDocsetIndex];
+    } else {
+        [mutableDocsets addObject:newDocset];
+    }
+
+    self.docsets = [mutableDocsets copy];
+    [self handleDocsetListChanged];
 }
 
 - (void)moveDocsetAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
-    DHDocset *toMove = self.docsets[fromIndex];
-    [self.docsets removeObjectAtIndex:fromIndex];
-    [self.docsets insertObject:toMove atIndex:toIndex];
+    NSParameterAssert(fromIndex >= 0);
+    NSParameterAssert(fromIndex < self.docsets.count);
+    NSParameterAssert(toIndex >= 0);
+    NSParameterAssert(toIndex < self.docsets.count);
+
+    if (fromIndex == toIndex) {
+        return;
+    }
+
+    NSMutableArray *mutableDocsets = [self.docsets mutableCopy];
+    DHDocset *movedDocset = mutableDocsets[fromIndex];
+    [mutableDocsets removeObjectAtIndex:fromIndex];
+    [mutableDocsets insertObject:movedDocset atIndex:toIndex];
+    self.docsets = [mutableDocsets copy];
+
     [self saveDefaults];
 }
 
-- (DHDocset *)docsetForDocumentationPage:(NSString *)url
+- (void)removeDocsetsInFolder:(nonnull NSString *)path
 {
-    if([url hasPrefix:@"dash-apple-api://"])
-    {
-        return [self appleAPIReferenceDocset];
-    }
-    url = [[url stringByDeletingPathFragment] stringByReplacingPercentEscapes];
-    for(DHDocset *docset in [NSArray arrayWithArray:self.docsets])
-    {
-        NSString *path = docset.path;
-        if(path && [url rangeOfString:path].location != NSNotFound)
-        {
-            return docset;
-        }
-    }
-    return nil;
+    self.docsets = [self.docsets filteredArrayUsingPredicate:[self predicateExcludingDocsetsAtPath:path]];
+    [self handleDocsetListChanged];
 }
 
-- (DHDocset *)docsetWithRelativePath:(NSString *)relativePath
+- (void)updateDocset:(DHDocset *)docset setEnabled:(BOOL)enabled;
 {
-    for(DHDocset *docset in self.docsets)
-    {
-        if([docset.relativePath isEqualToString:relativePath])
-        {
-            return docset;
-        }
-    }
-    return nil;
-}
-
-- (NSMutableArray *)enabledDocsets
-{
-    NSMutableArray *enabled = [NSMutableArray array];
-    for(DHDocset *docset in self.docsets)
-    {
-        if(docset.isEnabled)
-        {
-            [enabled addObject:docset];
-        }
-    }
-    return enabled;
-}
-
-- (DHDocset *)appleAPIReferenceDocset
-{
-    NSMutableOrderedSet *toCheck = [NSMutableOrderedSet orderedSet];
-    [toCheck addObjectsFromArray:self.enabledDocsets];
-    [toCheck addObjectsFromArray:self.docsets];
-    for(DHDocset *docset in toCheck)
-    {
-        if([[[docset relativePath] lastPathComponent] isEqualToString:@"Apple_API_Reference.docset"] && [[NSFileManager defaultManager] fileExistsAtPath:[[docset documentsPath] stringByAppendingPathComponent:@"Apple Docs Helper"]] && ![[[docset plist] objectForKey:@"DashDocSetIsGeneratedForiOSCompatibility"] boolValue])
-        {
-            return docset;
-        }
-    }
-    return nil;
+    docset.isEnabled = YES;
+    [self saveDefaults];
 }
 
 @end

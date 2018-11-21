@@ -758,7 +758,7 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
                 DHDocset *docset = [DHDocset firstDocsetInsideFolder:[self docsetPathForFeed:feed]];
                 docset.repoIdentifier = [self repoIdentifier];
                 docset.feedIdentifier = [feed uniqueIdentifier];
-                [[DHDocsetManager sharedManager] addDocset:docset andRemoveOthers:YES removeOnlyEqualPaths:[self isKindOfClass:[DHDocsetTransferrer class]]];
+                [[DHDocsetManager sharedManager] addDocset:docset replaceExisting:YES];
             }
             else if(isAnUpdate)
             {

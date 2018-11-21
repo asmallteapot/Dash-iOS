@@ -375,8 +375,8 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
 {
     if(self.editing)
     {
-        [self.shownDocsets[indexPath.row] setIsEnabled:YES];
-        [[DHDocsetManager sharedManager] saveDefaults];
+        DHDocset *docset = self.shownDocsets[indexPath.row];
+        [[DHDocsetManager sharedManager] updateDocset:docset setEnabled:YES];
         return;
     }
     if([self.sections[indexPath.section][indexPath.row] isKindOfClass:[DHRemote class]])
