@@ -96,7 +96,7 @@ static NSConditionLock *_stepLock = nil;
 + (DHDocset *)docsetAtPath:(NSString *)path
 {
     DHDocset *docset = [[DHDocset alloc] init];
-    docset.relativePath = [path substringFromString:[[[DHStorageController sharedController] libraryPath] stringByDeletingLastPathComponent]];
+    docset.relativePath = [path substringFromString:[[DHDocsetManager libraryPath] stringByDeletingLastPathComponent]];
     NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:[path stringByAppendingPathComponent:@"Contents/Info.plist"]];
     if(!plist)
     {
@@ -378,7 +378,7 @@ static NSConditionLock *_stepLock = nil;
 {
     if(!self._path)
     {
-        self._path = [[[[DHStorageController sharedController] libraryPath] stringByDeletingLastPathComponent] stringByAppendingPathComponent:self.relativePath];
+        self._path = [[[DHDocsetManager libraryPath] stringByDeletingLastPathComponent] stringByAppendingPathComponent:self.relativePath];
     }
     return self._path;
 }

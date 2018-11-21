@@ -65,10 +65,10 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setDoNotBackUp]; // this needs to be first because it deletes the preferences after a backup restore
-    NSLog(@"Home Path: %@", [[DHStorageController sharedController] libraryPath]);
+    NSLog(@"Home Path: %@", [DHDocsetManager libraryPath]);
     [self.window makeKeyAndVisible];
 
-    NSString *cachePath = [[DHStorageController sharedController] cachePath];
+    NSString *cachePath = [DHDocsetManager cachePath];
     if(cachePath)
     {
         [[NSFileManager defaultManager] removeItemAtPath:[cachePath stringByAppendingPathComponent:@"com.apple.nsurlsessiond/Downloads"] error:nil];
@@ -140,8 +140,7 @@
     {
         NSError *error;
         NSString *fileName = [actualURL lastPathComponent];
-        NSString *documentsPath = [[DHStorageController sharedController] documentsPath];
-        NSURL *copyToURL = [[NSURL fileURLWithPath:documentsPath] URLByAppendingPathComponent:fileName isDirectory:NO];
+        NSURL *copyToURL = [[NSURL fileURLWithPath:[DHDocsetManager documentsPath] URLByAppendingPathComponent:fileName isDirectory:NO];
         [[NSFileManager defaultManager] removeItemAtPath:copyToURL.path error:nil];
         [[NSFileManager defaultManager] moveItemAtURL:actualURL toURL:copyToURL error:&error];
         NSString *title;
@@ -241,7 +240,7 @@
 
 - (void)setDoNotBackUp
 {
-    NSString *path = [[[DHStorageController sharedController] libraryPath] stringByAppendingPathComponent:@"Docsets"];
+    NSString *path = [[DHDocsetManager libraryPath] stringByAppendingPathComponent:@"Docsets"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if(![fileManager fileExistsAtPath:path])
     {

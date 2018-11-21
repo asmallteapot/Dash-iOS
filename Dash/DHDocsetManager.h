@@ -27,6 +27,15 @@ extern NSString * const DHDocsetsChangedNotification;
 
 @property (strong) NSMutableArray *docsets;
 
+/// The path to the user's cache directory.
++ (NSString *)cachePath;
+
+/// The path to the user's documents directory.
++ (NSString *)documentsPath;
+
+/// The path to the user's library directory.
++ (NSString *)libraryPath;
+
 + (DHDocsetManager *)sharedManager;
 
 - (void)addDocset:(DHDocset *)docset andRemoveOthers:(BOOL)shouldRemove removeOnlyEqualPaths:(BOOL)removeOnlyEqualPaths;

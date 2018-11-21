@@ -44,10 +44,10 @@
     self.clearsSelectionOnViewWillAppear = NO;
     self.searchController = [DHDBSearchController searchControllerWithDocsets:@[self.docset] typeLimit:self.type viewController:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(prepareForURLSearch:) name:DHPrepareForURLSearch object:nil];
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:@"DHBrowserCell" bundle:nil] forCellReuseIdentifier:@"DHBrowserCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"DHLoadingCell" bundle:nil] forCellReuseIdentifier:@"DHLoadingCell"];
-    
+
     self.tableView.rowHeight = 44;
 
     if(self.isRestoring)
@@ -156,7 +156,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DHBrowserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:(self.isLoading || self.isEmpty) ? @"DHLoadingCell" : @"DHBrowserCell" forIndexPath:indexPath];
-    
+
     if((self.isLoading || self.isEmpty) && indexPath.row == 2)
     {
         cell.userInteractionEnabled = NO;
@@ -246,7 +246,7 @@
             DHDBResult *result = (DHDBResult *)self.entries[i];
             NSArray *components = [result.fullPath componentsSeparatedByString:@"/Library/Docsets"];
             if (components.count == 2) {
-                result.fullPath = [@"file://" stringByAppendingFormat:@"%@%@%@",[[DHStorageController sharedController] libraryPath],@"/Docsets",components[1]];
+                result.fullPath = [@"file://" stringByAppendingFormat:@"%@%@%@",[DHDocsetManager libraryPath],@"/Docsets",components[1]];
             }
         }
     }

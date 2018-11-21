@@ -275,7 +275,7 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
 {
     NSUInteger row = [sender tag];
     DHFeed *feed = [self activeFeeds][row];
-    
+
     if([self canInstallFeed:feed])
     {
         [self startInstallingFeed:feed isAnUpdate:NO];
@@ -372,13 +372,13 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
     }
     else
     {
-        [self showDownloadButtonForFeed:feed];        
+        [self showDownloadButtonForFeed:feed];
     }
 }
 
 - (void)feedWasStopped:(DHFeed *)feed
 {
-    
+
 }
 
 - (IBAction)uninstallButtonPressed:(id)sender
@@ -390,11 +390,11 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
     feed.installedVersion = nil;
     [self saveState];
     [self setTitle:[feed docsetNameWithVersion:YES] forCell:feed.cell];
-    
+
     NSString *trashPath = [self uniqueTrashPath];
     NSString *feedPath = [self docsetPathForFeed:feed];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
+
     [[DHDocsetManager sharedManager] removeDocsetsInFolder:feedPath];
 
     [fileManager moveItemAtPath:feedPath toPath:trashPath error:nil];
@@ -407,7 +407,7 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
 
 - (void)feedDidUninstall:(DHFeed *)feed
 {
-    
+
 }
 
 - (void)emptyTrashAtPath:(NSString *)trashPath
@@ -719,7 +719,7 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
 
 - (void)feedWillInstall:(DHFeed *)feed
 {
-    
+
 }
 
 - (void)startInstallingFeed:(DHFeed *)feed isAnUpdate:(BOOL)isAnUpdate
@@ -853,7 +853,7 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
 
 - (NSString *)docsetInstallFolderPath
 {
-    return [[[[DHStorageController sharedController] libraryPath] stringByAppendingPathComponent:@"Docsets"] stringByAppendingPathComponent:[self docsetInstallFolderName]];
+    return [[[DHDocsetManager libraryPath] stringByAppendingPathComponent:@"Docsets"] stringByAppendingPathComponent:[self docsetInstallFolderName]];
 }
 
 - (NSString *)docsetPathForFeed:(DHFeed *)feed

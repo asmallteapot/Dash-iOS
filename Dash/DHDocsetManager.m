@@ -24,6 +24,21 @@ NSString * const DHDocsetsChangedNotification = @"DHDocsetsChangedNotification";
 
 @implementation DHDocsetManager
 
++ (NSString *)cachePath;
+{
+    return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+}
+
++ (NSString *)documentsPath;
+{
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+}
+
++ (NSString *)libraryPath;
+{
+    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
+}
+
 + (DHDocsetManager *)sharedManager
 {
     static dispatch_once_t pred;

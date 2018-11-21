@@ -71,10 +71,10 @@
     self.installing = NO;
     self.feedResult = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if(![fileManager fileExistsAtPath:[[[DHStorageController sharedController] documentsPath] stringByAppendingPathComponent:self.feed]])
+    if(![fileManager fileExistsAtPath:[[DHDocsetManager documentsPath] stringByAppendingPathComponent:self.feed]])
     {
-        [fileManager moveItemAtPath:self.feedURL toPath:[[[DHStorageController sharedController] documentsPath] stringByAppendingPathComponent:self.feed] error:nil];
-        self.feedURL = [[[DHStorageController sharedController] documentsPath] stringByAppendingPathComponent:self.feed];
+        [fileManager moveItemAtPath:self.feedURL toPath:[[DHDocsetManager documentsPath] stringByAppendingPathComponent:self.feed] error:nil];
+        self.feedURL = [[DHDocsetManager documentsPath] stringByAppendingPathComponent:self.feed];
         self.docset = nil;
         [self loadDocset];
     }

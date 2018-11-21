@@ -244,6 +244,8 @@
 		9B14768521A4EB75008C4475 /* DHURLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768321A4EB75008C4475 /* DHURLSearch.m */; };
 		9B14768821A5E84C008C4475 /* FMDatabase+DHDBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */; };
 		9B14768921A5E855008C4475 /* FMDatabase+DHDBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */; };
+		9B14768421A4EB75008C4475 /* DHURLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768321A4EB75008C4475 /* DHURLSearch.m */; };
+		9B14768521A4EB75008C4475 /* DHURLSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B14768321A4EB75008C4475 /* DHURLSearch.m */; };
 		F5C39C00200A836D00734571 /* DHDocsetBrowserViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C39BFF200A836D00734571 /* DHDocsetBrowserViewModel.m */; };
 /* End PBXBuildFile section */
 
@@ -474,6 +476,8 @@
 		9B14768321A4EB75008C4475 /* DHURLSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHURLSearch.m; sourceTree = "<group>"; };
 		9B14768621A5E84B008C4475 /* FMDatabase+DHDBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+DHDBAdditions.h"; sourceTree = "<group>"; };
 		9B14768721A5E84C008C4475 /* FMDatabase+DHDBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+DHDBAdditions.m"; sourceTree = "<group>"; };
+		9B14768221A4EB75008C4475 /* DHURLSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHURLSearch.h; sourceTree = "<group>"; };
+		9B14768321A4EB75008C4475 /* DHURLSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHURLSearch.m; sourceTree = "<group>"; };
 		9FB91D369AD27465BED375AD /* libPods-Dash-Dash App Store.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dash-Dash App Store.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAE47FF5DEE33300EBFF9AEA /* Pods-Dash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Dash/Pods-Dash.debug.xcconfig"; sourceTree = "<group>"; };
 		F5C39BFE200A836D00734571 /* DHDocsetBrowserViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHDocsetBrowserViewModel.h; sourceTree = "<group>"; };

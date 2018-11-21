@@ -75,21 +75,21 @@ static id singleton = nil;
 
     [self.splitViewController setPreferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
     self.splitViewController.presentsWithGesture = NO;
-    
+
     if(isRegularHorizontalClass)
     {
         self.navigationController.delegate = self;
     }
-    
+
     self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"forward"] style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
     self.zoomOutButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"zoomOut"] style:UIBarButtonItemStylePlain target:self action:@selector(zoomOut)];
     self.zoomInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"zoomIn"] style:UIBarButtonItemStylePlain target:self action:@selector(zoomIn)];
 //    self.stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self.webView action:@selector(stopLoading)];
 //    self.reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload)];
-    
+
     [self updateBackForwardButtonState];
-    
+
     self.toolbarItems = @[self.backButton, UIBarButtonWithFixedWidth(10), self.forwardButton, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], self.zoomOutButton, UIBarButtonWithFixedWidth(3), self.zoomInButton];
     [self updateStopReloadButtonState];
     self.didLoadOnce = YES;
@@ -178,7 +178,7 @@ static id singleton = nil;
     self.ignoreScroll = YES;
     if(![DHRemoteServer sharedServer].connectedRemote)
     {
-        self.navigationController.toolbarHidden = NO;        
+        self.navigationController.toolbarHidden = NO;
     }
     CGFloat progressBarHeight = 2.f;
     CGRect navigationBarBounds = self.navigationController.navigationBar.bounds;
@@ -205,7 +205,7 @@ static id singleton = nil;
         self.navigationItem.leftBarButtonItems = nil;
     }
     self.toolbarItems = @[self.backButton, UIBarButtonWithFixedWidth(10), self.forwardButton, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], self.zoomOutButton, UIBarButtonWithFixedWidth(3), self.zoomInButton];
-    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -594,7 +594,7 @@ static id singleton = nil;
     NSString *anchor = [[urlString substringFromStringReturningNil:@"#"] stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString *urlWithoutAnchor = [[urlString substringToString:@"#"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     urlString = (anchor) ? [urlWithoutAnchor stringByAppendingFormat:@"#%@", anchor] : urlWithoutAnchor;
-    
+
     if(![urlString hasCaseInsensitivePrefix:@"file://"] && [urlString hasPrefix:@"/"])
     {
         urlString = [@"dash-tarix://" stringByAppendingString:urlString];
@@ -762,7 +762,7 @@ static id singleton = nil;
 {
     [super encodeRestorableStateWithCoder:coder];
     [coder encodeObject:self.webView.request.URL.absoluteString forKey:@"webViewURL"];
-    [coder encodeObject:[[DHStorageController sharedController] libraryPath] forKey:@"homePath"];
+    [coder encodeObject:[DHDocsetManager libraryPath] forKey:@"homePath"];
     [coder encodeCGPoint:self.webView.scrollView.contentOffset forKey:@"webViewOffset"];
 }
 
@@ -773,9 +773,9 @@ static id singleton = nil;
     NSString *lastHomePath = [coder decodeObjectForKey:@"homePath"];
     self.webViewOffset = [coder decodeCGPointForKey:@"webViewOffset"];
     if (lastHomePath) {
-        loadURL = [[loadURL stringByReplacingOccurrencesOfString:lastHomePath withString:[[DHStorageController sharedController] libraryPath]] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        loadURL = [[loadURL stringByReplacingOccurrencesOfString:lastHomePath withString:[DHDocsetManager libraryPath]] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
-    
+
     self.isRestoring = YES;
     [self viewDidLoad];
     self.isRestoring = NO;
@@ -789,7 +789,7 @@ static id singleton = nil;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+
 }
 
 static inline UIBarButtonItem *UIBarButtonWithFixedWidth(CGFloat width)
