@@ -27,28 +27,25 @@ extern NSString * const DHDocsetsChangedNotification;
 
 @interface DHDocsetManager : NSObject
 
-/// @section File paths
-
-/// @return The path to the user's cache directory.
-+ (nullable NSString *)cachePath;
-
-/// @return The path to the user's documents directory.
-+ (nullable NSString *)documentsPath;
-
-/// @return The path to the user's library directory.
-+ (nullable NSString *)libraryPath;
-
 /// @section Singleton
 
 /// @return The shared docset manager.
 + (instancetype)sharedManager;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /// @section Storing the list of docsets in the user defaults
 
 /// Save the list of docsets to the user defaults
-- (void)saveDefaults;
+- (void)saveDocsetList;
 
 /// @section Reading the list of docsets
+
+/// Docset download path
+@property (strong, nonatomic, readonly) NSURL *docsetDownloadsURL;
+
+/// Docset library path
+@property (strong, nonatomic, readonly) NSURL *docsetLibraryURL;
 
 /// The list of all docsets.
 @property (copy, nonatomic, readonly) NSArray<DHDocset *> *docsets;
@@ -84,6 +81,8 @@ extern NSString * const DHDocsetsChangedNotification;
  */
 - (void)addDocset:(DHDocset *)docset replaceExisting:(BOOL)replaceExisting;
 
+- (BOOL)importDocsetFromURL:(NSURL *)sourceURL error:(NSError **)error;
+
 /**
  Enables or disables the provided docset.
  @param docset The docset to enable or disable
@@ -103,6 +102,11 @@ extern NSString * const DHDocsetsChangedNotification;
  @param toIndex The index that the docset should be moved to.
  */
 - (void)moveDocsetAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
+
+/// @section Cache
+
+- (void)removeCachedDownloads;
+
 @end
 
 NS_ASSUME_NONNULL_END

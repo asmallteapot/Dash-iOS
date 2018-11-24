@@ -391,11 +391,9 @@ static NSAttributedString *_titleBarItemAttributedStringTemplate = nil;
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(self.editing)
-    {
-        [self.shownDocsets[indexPath.row] setIsEnabled:NO];
-        [[DHDocsetManager sharedManager] saveDefaults];
-        return;
+    if (self.editing) {
+        DHDocset *docset = self.shownDocsets[indexPath.row];
+        [[DHDocsetManager sharedManager] updateDocset:docset setEnabled:NO];
     }
 }
 

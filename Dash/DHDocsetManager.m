@@ -35,6 +35,9 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
 /// Controller for accessing user defaults
 @property (strong, nonatomic, nonnull) NSUserDefaults *userDefaults;
 
+/// Cached downloads URL
+@property (copy, nonatomic, nonnull) NSURL *cachedDownloadsURL;
+
 /// Predicate for listing enabled docsets
 @property (strong, nonatomic, nonnull) NSPredicate *predicateMatchingAppleAPIReferenceDocsets;
 
@@ -45,27 +48,12 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
 @property (strong, nonatomic, nonnull) NSPredicate *predicateMatchingEnabledDocsets;
 
 // redeclare internal-readwrite properties
-@property (copy, nonatomic, readwrite) NSArray<DHDocset *> *docsets;
+@property (strong, nonatomic, nonnull, readwrite) NSURL *docsetDownloadsURL;
+@property (strong, nonatomic, nonnull, readwrite) NSURL *docsetLibraryURL;
+@property (copy, nonatomic, nonnull, readwrite) NSArray<DHDocset *> *docsets;
 @end
 
 @implementation DHDocsetManager
-
-#pragma mark - File paths
-
-+ (nullable NSString *)cachePath;
-{
-    return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-}
-
-+ (nullable NSString *)documentsPath;
-{
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-}
-
-+ (nullable NSString *)libraryPath;
-{
-    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
-}
 
 #pragma mark - Singleton
 
@@ -74,20 +62,23 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
     static dispatch_once_t pred;
     static DHDocsetManager *_docsetManager = nil;
     dispatch_once(&pred, ^{
-        _docsetManager = [[DHDocsetManager alloc] init];
+        NSString *docsetLibraryPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Docsets"];
+        NSURL *docsetLibraryURL = [NSURL fileURLWithPath:docsetLibraryPath isDirectory:YES];
+        _docsetManager = [[DHDocsetManager alloc] initWithDocsetLibraryURL:docsetLibraryURL];
     });
     return _docsetManager;
 }
 
 #pragma mark - Initialization
 
-- (instancetype)init;
+- (instancetype)initWithDocsetLibraryURL:(NSURL *)docsetLibraryURL;
 {
     self = [super init];
     if (self) {
-        self.docsets = @[];
         self.fileManager = [NSFileManager defaultManager];
         self.notificationCenter = [NSNotificationCenter defaultCenter];
+        self.userDefaults = [NSUserDefaults standardUserDefaults];
+
         self.predicateMatchingAppleAPIReferenceDocsets = [NSPredicate predicateWithBlock:^BOOL(DHDocset * _Nullable docset, NSDictionary<NSString *,id> * _Nullable bindings) {
             if (![[docset.relativePath lastPathComponent] isEqualToString:@"Apple_API_Reference.docset"]) {
                 return NO;
@@ -106,9 +97,16 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
         }];
         self.predicateMatchingDocsetsAtRelativePath = [NSPredicate predicateWithFormat:@"relativePath = '%@'"];
         self.predicateMatchingEnabledDocsets = [NSPredicate predicateWithFormat:@"isEnabled = YES"];
-        self.userDefaults = [NSUserDefaults standardUserDefaults];
 
-        [self loadDefaults];
+        NSString *docsetDownloadsPath = [NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES) lastObject];
+        self.docsetDownloadsURL = [NSURL fileURLWithPath:docsetDownloadsPath isDirectory:YES];
+
+        NSString *cachedDownloadsPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"com.apple.nsurlsessiond/Downloads"];
+        self.cachedDownloadsURL = [NSURL fileURLWithPath:cachedDownloadsPath isDirectory:YES];
+
+        self.docsetLibraryURL = docsetLibraryURL;
+        [self createDocsetLibraryIfNeeded];
+        [self loadDocsetList];
     }
     return self;
 }
@@ -118,7 +116,7 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
 /// Saves the changed docset list and posts a notification.
 - (void)handleDocsetListChanged;
 {
-    [self saveDefaults];
+    [self saveDocsetList];
     [self postDocsetsChangedNotification];
 }
 
@@ -152,17 +150,43 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
 
 #pragma mark - User defaults
 
+- (void)createDocsetLibraryIfNeeded;
+{
+    BOOL isDirectory;
+    BOOL exists = [self.fileManager fileExistsAtPath:self.docsetLibraryURL.path isDirectory:&isDirectory];
+    if (exists && isDirectory) {
+        NSLog(@"%s - Using storage directory at %@'", __PRETTY_FUNCTION__, self.docsetLibraryURL);
+    } else {
+        NSLog(@"%s - Creating storage directory at %@'", __PRETTY_FUNCTION__, self.docsetLibraryURL);
+        [self.fileManager createDirectoryAtPath:self.self.docsetLibraryURL.path withIntermediateDirectories:YES attributes:nil error:nil];
+
+        NSArray<NSString *> *defaultsKeys = @[
+            @"DHDocsetDownloaderScheduledUpdate",
+            @"DHDocsetDownloader",
+            @"DHDocsetTransferrer",
+            @"docsets"
+        ];
+
+        for (NSString *key in defaultsKeys) {
+            [self.userDefaults removeObjectForKey:key];
+        }
+    }
+
+    [self.docsetLibraryURL setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:nil];
+}
+
 /// Loads the docset list from the user defaults
-- (void)loadDefaults;
+- (void)loadDocsetList;
 {
     NSMutableArray *loadedDocsets = [[NSMutableArray alloc] init];
     NSArray *docsetList = [self.userDefaults arrayForKey:DHDocsetsUserDefaultsKey];
     for (NSDictionary *dictionary in docsetList) {
         DHDocset *docset = [DHDocset docsetWithDictionaryRepresentation:dictionary];
-        if ([self.fileManager fileExistsAtPath:docset.path]) {
+        NSURL *docsetURL = [self.docsetLibraryURL URLByAppendingPathComponent:docset.name];
+        if ([self.fileManager fileExistsAtPath:docsetURL.path]) {
             [loadedDocsets addObject:docset];
         } else {
-            NSLog(@"%s - Docset not found at '%@'", __PRETTY_FUNCTION__, docset.path);
+            NSLog(@"%s - Docset not found at '%@'", __PRETTY_FUNCTION__, docsetURL);
         }
     }
 
@@ -171,7 +195,7 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
 }
 
 /// Saves the docset list to the user defaults.
-- (void)saveDefaults;
+- (void)saveDocsetList;
 {
     NSMutableArray<NSDictionary *> *dictionaries = [NSMutableArray array];
     for (DHDocset *docset in self.docsets) {
@@ -253,6 +277,15 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
     [self handleDocsetListChanged];
 }
 
+- (BOOL)importDocsetFromURL:(NSURL *)sourceURL error:(NSError **)error;
+{
+    NSString *fileName = [sourceURL lastPathComponent];
+    NSURL *destinationURL = [self.docsetLibraryURL URLByAppendingPathComponent:fileName isDirectory:NO];
+
+    [self.fileManager removeItemAtURL:destinationURL error:nil];
+    return [self.fileManager moveItemAtURL:sourceURL toURL:destinationURL error:error];
+}
+
 - (void)moveDocsetAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
     NSParameterAssert(fromIndex >= 0);
@@ -270,7 +303,7 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
     [mutableDocsets insertObject:movedDocset atIndex:toIndex];
     self.docsets = [mutableDocsets copy];
 
-    [self saveDefaults];
+    [self saveDocsetList];
 }
 
 - (void)removeDocsetsInFolder:(nonnull NSString *)path
@@ -282,7 +315,14 @@ NSString * const DHDocsetsUserDefaultsKey = @"docsets";
 - (void)updateDocset:(DHDocset *)docset setEnabled:(BOOL)enabled;
 {
     docset.isEnabled = YES;
-    [self saveDefaults];
+    [self saveDocsetList];
+}
+
+#pragma mark - Cache
+
+- (void)removeCachedDownloads;
+{
+    [self.fileManager removeItemAtPath:self.cachedDownloadsURL.path error:nil];
 }
 
 @end

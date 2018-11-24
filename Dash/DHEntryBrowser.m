@@ -246,7 +246,8 @@
             DHDBResult *result = (DHDBResult *)self.entries[i];
             NSArray *components = [result.fullPath componentsSeparatedByString:@"/Library/Docsets"];
             if (components.count == 2) {
-                result.fullPath = [@"file://" stringByAppendingFormat:@"%@%@%@",[DHDocsetManager libraryPath],@"/Docsets",components[1]];
+                result.fullPath = [DHDocsetManager.sharedManager.docsetLibraryURL URLByAppendingPathComponent:components[1]].absoluteString;
+
             }
         }
     }

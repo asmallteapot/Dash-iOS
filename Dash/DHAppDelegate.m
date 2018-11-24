@@ -62,17 +62,14 @@
     return [self sharedDelegate].window.rootViewController.storyboard;
 }
 
+#pragma mark - App launch
+
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setDoNotBackUp]; // this needs to be first because it deletes the preferences after a backup restore
-    NSLog(@"Home Path: %@", [DHDocsetManager libraryPath]);
-    [self.window makeKeyAndVisible];
+    // this needs to be first because it deletes the preferences after a backup restore
+    [[DHDocsetManager sharedManager] removeCachedDownloads];
 
-    NSString *cachePath = [DHDocsetManager cachePath];
-    if(cachePath)
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:[cachePath stringByAppendingPathComponent:@"com.apple.nsurlsessiond/Downloads"] error:nil];
-    }
+    [self.window makeKeyAndVisible];
 
 #ifdef APP_STORE
 #ifndef DEBUG
@@ -100,7 +97,6 @@
     [NSURLProtocol registerClass:[DHBlockProtocol class]];
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"]]];
     [DHDocset stepLock];
-    [DHDocsetManager sharedManager];
     [DHCSS sharedCSS];
     [DHDBResultSorter sharedSorter];
     [DHDBNestedResultSorter sharedSorter];
@@ -123,6 +119,8 @@
     [lagFreeField setHidden:YES];
     return YES;
 }
+
+#pragma mark - Opening URLs
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
@@ -168,27 +166,19 @@
 
 - (BOOL)importDocumentFromURL:(NSURL *)sourceURL
 {
-    NSString *fileName = [sourceURL lastPathComponent];
-    NSURL *destinationURL = [[NSURL fileURLWithPath:[DHDocsetManager documentsPath] URLByAppendingPathComponent:fileName isDirectory:NO];
-
-    [[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
-
     NSError *error;
-    [[NSFileManager defaultManager] moveItemAtURL:sourceURL toURL:destinationURL error:&error];
+    BOOL imported = [[DHDocsetManager sharedManager] importDocsetFromURL:sourceURL error:&error];
 
     NSString *title;
     NSString *message;
-    if(error)
-    {
-        title = @"Import Failed";
-        message = @"Could not import the docset. Please try again!";
-        NSLog(@"%@", error.localizedDescription);
-    }
-    else
-    {
+    if (imported) {
         title = @"Import Successful";
         message = @"You can find the docset in Settings, under the Transfer Docsets section.";
         NSLog(@"Docset successfully imported");
+    } else {
+        title = @"Import Failed";
+        message = @"Could not import the docset. Please try again!";
+        NSLog(@"%@", error.localizedDescription);
     }
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle: UIAlertControllerStyleAlert];
@@ -198,14 +188,7 @@
     return YES;
 }
 
-- (UINavigationController *)navigationController
-{
-    if([self.window.rootViewController isKindOfClass:[UINavigationController class]])
-    {
-        return (UINavigationController*)self.window.rootViewController;
-    }
-    return self.window.rootViewController.navigationController;
-}
+#pragma mark - App lifecycle
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -253,6 +236,8 @@
     NSLog(@"did receive memory warning");
 }
 
+#pragma mark - Background events
+
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)(void))completionHandler
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -260,7 +245,7 @@
     }];
 }
 
-#pragma mark - UIStateRestoration
+#pragma mark - State restoration
 
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder {
     return YES;
@@ -270,22 +255,7 @@
     return YES;
 }
 
-- (void)setDoNotBackUp
-{
-    NSString *path = [[DHDocsetManager libraryPath] stringByAppendingPathComponent:@"Docsets"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if(![fileManager fileExistsAtPath:path])
-    {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        for(NSString *key in @[@"DHDocsetDownloaderScheduledUpdate", @"DHDocsetDownloader", @"DHDocsetTransferrer", @"docsets"])
-        {
-            [defaults removeObjectForKey:key];
-        }
-        [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    NSURL *url = [NSURL fileURLWithPath:path];
-    [url setResourceValue:@YES forKey: NSURLIsExcludedFromBackupKey error:nil];
-}
+#pragma mark - Received actions
 
 - (void)clipboardChanged:(NSNotification*)notification
 {
@@ -298,6 +268,8 @@
         } repeats:NO];
     }
 }
+
+#pragma mark - Integrity protection
 
 - (void)checkCommitHashes
 {
@@ -322,6 +294,17 @@
             NSLog(@"Wrong git hash %@ for %@. Maybe you forgot to sync something or update this list?", plistHash, key);
         }
     }];
+}
+
+#pragma mark - Accessors
+
+- (UINavigationController *)navigationController
+{
+    if([self.window.rootViewController isKindOfClass:[UINavigationController class]])
+    {
+        return (UINavigationController*)self.window.rootViewController;
+    }
+    return self.window.rootViewController.navigationController;
 }
 
 - (DHWindow *)window

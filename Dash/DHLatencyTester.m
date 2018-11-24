@@ -116,7 +116,7 @@
 {
     if(![NSThread isMainThread])
     {
-        [self performSelectorOnMainThread:@selector(saveDefaults) withObject:nil waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(saveDocsetList) withObject:nil waitUntilDone:YES];
         return;
     }
     NSMutableArray *array = [NSMutableArray array];

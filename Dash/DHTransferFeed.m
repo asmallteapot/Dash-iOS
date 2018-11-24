@@ -71,10 +71,11 @@
     self.installing = NO;
     self.feedResult = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if(![fileManager fileExistsAtPath:[[DHDocsetManager documentsPath] stringByAppendingPathComponent:self.feed]])
+    NSString *feedDownloadPath = [[DHDocsetManager sharedManager].docsetDownloadsURL URLByAppendingPathComponent:self.feed].path;
+    if(![fileManager fileExistsAtPath:feedDownloadPath])
     {
-        [fileManager moveItemAtPath:self.feedURL toPath:[[DHDocsetManager documentsPath] stringByAppendingPathComponent:self.feed] error:nil];
-        self.feedURL = [[DHDocsetManager documentsPath] stringByAppendingPathComponent:self.feed];
+        [fileManager moveItemAtPath:self.feedURL toPath:feedDownloadPath error:nil];
+        self.feedURL = feedDownloadPath;
         self.docset = nil;
         [self loadDocset];
     }

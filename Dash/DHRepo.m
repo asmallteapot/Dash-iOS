@@ -853,7 +853,7 @@ NSString * const DHSettingsChangedNotification = @"DHSettingsChangedNotification
 
 - (NSString *)docsetInstallFolderPath
 {
-    return [[[DHDocsetManager libraryPath] stringByAppendingPathComponent:@"Docsets"] stringByAppendingPathComponent:[self docsetInstallFolderName]];
+    return [DHDocsetManager.sharedManager.docsetLibraryURL URLByAppendingPathComponent:self.docsetInstallFolderName].path;
 }
 
 - (NSString *)docsetPathForFeed:(DHFeed *)feed

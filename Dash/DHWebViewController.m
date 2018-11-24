@@ -762,7 +762,7 @@ static id singleton = nil;
 {
     [super encodeRestorableStateWithCoder:coder];
     [coder encodeObject:self.webView.request.URL.absoluteString forKey:@"webViewURL"];
-    [coder encodeObject:[DHDocsetManager libraryPath] forKey:@"homePath"];
+    [coder encodeObject:DHDocsetManager.sharedManager.docsetLibraryURL.path forKey:@"homePath"];
     [coder encodeCGPoint:self.webView.scrollView.contentOffset forKey:@"webViewOffset"];
 }
 
@@ -773,7 +773,7 @@ static id singleton = nil;
     NSString *lastHomePath = [coder decodeObjectForKey:@"homePath"];
     self.webViewOffset = [coder decodeCGPointForKey:@"webViewOffset"];
     if (lastHomePath) {
-        loadURL = [[loadURL stringByReplacingOccurrencesOfString:lastHomePath withString:[DHDocsetManager libraryPath]] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        loadURL = [[loadURL stringByReplacingOccurrencesOfString:lastHomePath withString:DHDocsetManager.sharedManager.docsetLibraryURL.path] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
 
     self.isRestoring = YES;

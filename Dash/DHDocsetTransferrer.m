@@ -44,7 +44,7 @@ static id singleton = nil;
 {
     feed.feedResult = [[DHFeedResult alloc] init];
     feed.feedResult.feed = feed;
-    NSString *sourcePath = [[DHDocsetManager documentsPath] stringByAppendingPathComponent:feed.feed];
+    NSString *sourcePath = [[DHDocsetManager sharedManager].docsetDownloadsURL URLByAppendingPathComponent:feed.feed].path;
     @synchronized([DHDocsetTransferrer class])
     {
         feed.feedURL = [self docsetPathForFeed:feed];
@@ -133,7 +133,7 @@ static id singleton = nil;
 - (IBAction)refreshFeeds:(id)sender
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *waitingPath = [DHDocsetManager documentsPath];
+    NSString *waitingPath = [DHDocsetManager sharedManager].docsetDownloadsURL.path;
     NSArray *waiting = [fileManager contentsOfDirectoryAtPath:waitingPath error:nil];
     self.loadedFeedsHash = [waiting componentsJoinedByString:@"xx"];
     NSMutableArray *newFeeds = [NSMutableArray array];
@@ -292,7 +292,7 @@ static id singleton = nil;
 {
     ++self.pollCounter;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if(!self.loadedFeedsHash || ![[[fileManager contentsOfDirectoryAtPath:[DHDocsetManager documentsPath] error:nil] componentsJoinedByString:@"xx"] isEqualToString:self.loadedFeedsHash])
+    if(!self.loadedFeedsHash || ![[[fileManager contentsOfDirectoryAtPath:[DHDocsetManager sharedManager].docsetDownloadsURL.path error:nil] componentsJoinedByString:@"xx"] isEqualToString:self.loadedFeedsHash])
     {
         [self refreshFeeds:nil];
     }
